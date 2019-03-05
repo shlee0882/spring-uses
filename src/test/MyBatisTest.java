@@ -37,7 +37,6 @@ public class MyBatisTest {
 	}
 	
 	// insert
-	
-	
+
 	
 }
