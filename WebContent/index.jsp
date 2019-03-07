@@ -171,7 +171,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img src="../img/event1.PNG" class="d-block w-100" alt="...">
+          <img src="../img/event1.png" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
             <h5>Third slide label</h5>
             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
