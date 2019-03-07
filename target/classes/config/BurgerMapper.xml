@@ -22,6 +22,11 @@
 	       AND b.display_yn = 'Y'
 	</select>
 
+	<select id="selectDivisionList" resultType="Division">
+	SELECT a.item
+		 , a.contents
+	  FROM division a
+	</select>
 
 
 

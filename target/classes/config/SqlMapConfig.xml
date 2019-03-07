@@ -11,6 +11,7 @@
     
 	<typeAliases>
 		<typeAlias alias="Burger" type="burger.vo.BurgerVO" />
+		<typeAlias alias="Division" type="burger.vo.DivisionVO" />
 	</typeAliases>
 
 </configuration>

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import burger.service.BurgerService;
 import burger.vo.BurgerVO;
+import burger.vo.DivisionVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:config/beans.xml")
@@ -30,13 +31,17 @@ public class MyBatisTest {
 	}
 	
 	// 조회
-	@Test
+	@Test @Ignore
 	public void getMenuList() {
 		List<BurgerVO> burgerList = burgerService.getBurgerList();
 		System.out.println(burgerList);
 	}
 	
-	// insert
-
+	// 항목 조회
+	@Test
+	public void getDivisionList() {
+		List<DivisionVO> divisionList = burgerService.getDivisionList();
+		System.out.println(divisionList);
+	}
 	
 }

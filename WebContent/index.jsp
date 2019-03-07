@@ -64,11 +64,11 @@
             <div class="col-12 col-md-1 col-lg-1">
             </div>
             <div class="col-12 col-md-4 col-lg-4">
-              <select class="custom-select height100" id="inputGroupSelect02">
+              <select class="custom-select" id="inputGroupSelect02">
                 <option selected>브랜드 선택</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+ 			  <c:forEach var="brand" items="${brandList}">
+ 			  	<option value="1">${brand.contents}</option>
+			  </c:forEach>
               </select>
             </div>
             <div class="col-12 col-md-2 col-lg-2">
@@ -76,9 +76,9 @@
             <div class="col-12 col-md-4 col-lg-4">
               <select class="custom-select" id="inputGroupSelect02">
                 <option selected>메뉴 선택</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+ 			  <c:forEach var="menu" items="${menuList}">
+ 			  	<option value="1">${menu.contents}</option>
+			  </c:forEach>
               </select>
             </div>
             <div class="col-12 col-md-1 col-lg-1">
@@ -92,10 +92,10 @@
             </div>
             <div class="col-12 col-md-4">
               <select class="custom-select" id="inputGroupSelect02">
-                <option selected>가격 선택</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <option selected>가격 선택</option>
+ 			  <c:forEach var="price" items="${priceList}">
+ 			  	<option value="1">${price.contents}</option>
+			  </c:forEach>
               </select>
             </div>
             <div class="col-12 col-md-2 col-lg-2">
@@ -103,9 +103,9 @@
             <div class="col-12 col-md-4">
               <select class="custom-select" id="inputGroupSelect02">
                 <option selected>칼로리 선택</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+ 			  <c:forEach var="calory" items="${caloryList}">
+ 			  	<option value="1">${calory.contents}</option>
+			  </c:forEach>
               </select>
             </div>
             <div class="col-12 col-md-1 col-lg-1">
@@ -218,6 +218,7 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script>
+
 	$("#submit").click(function() {
 	    $.ajax({
 	        url : "/burgers",
@@ -247,49 +248,6 @@
 				  markup5 += '</div>';
 				  markup5 += '</div>';
 				  markup5 += '</div>';
-
-// 	        	<div class="col-md-4">
-// 	            <div class="card mb-4 shadow-sm">
-// 	              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-// 	                <title>Placeholder</title>
-// 	                <rect width="100%" height="100%" fill="#f2f2f2">
-// 	                </rect>
-// 	                <image xlink:href="../img/sanghai.png" height="100%" width="100%"></image>
-// 	              </svg>
-// 	              <div class="card-body">
-// 	                <table class="table">
-// 	                  <thead>
-// 	                    <tr>
-// 	                      <th scope="col">항목</th>
-// 	                      <th scope="col">내용</th>
-// 	                    </tr>
-// 	                  </thead>
-// 	                  <tbody>
-// 	                    <tr>
-// 	                      <td>브랜드</td>
-// 	                      <td>맥도날드</td>
-// 	                    </tr>
-// 	                    <tr>
-// 	                      <td>메뉴명</td>
-// 	                      <td>빅맥</td>
-// 	                    </tr>
-// 	                    <tr>
-// 	                      <td>단품가격</td>
-// 	                      <td>4500</td>
-// 	                    </tr>
-// 	                    <tr>
-// 	                      <td>세트가격</td>
-// 	                      <td>4900</td>
-// 	                    </tr>
-// 	                    <tr>
-// 	                      <td>칼로리</td>
-// 	                      <td>512</td>
-// 	                    </tr>
-// 	                  </tbody>
-// 	                </table>
-// 	              </div>
-// 	            </div>
-// 	          </div>
 	        	
 	        	var newMarkUp = "";
 	        	for(var i=0; i<resData.length; i++){
