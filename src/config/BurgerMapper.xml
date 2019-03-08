@@ -9,7 +9,7 @@
         WHERE a.menu_name = #{value}
 	</select>
 
-	<select id="selectBurgerList" resultType="Burger">
+	<select id="selectBurgerList" parameterType="map" resultType="Burger">
 	    SELECT a.chain_name
 		         , b.menu_name
 		         , b.single_price

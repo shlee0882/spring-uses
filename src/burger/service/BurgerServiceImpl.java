@@ -1,6 +1,7 @@
 package burger.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +22,16 @@ public class BurgerServiceImpl implements BurgerService{
 	}
 
 	@Override
-	public List<BurgerVO> getBurgerList() {
-		// TODO Auto-generated method stub
-		return burgerdao.getBurgerList();
+	public List<BurgerVO> getBurgerList(Map<String, Object> dataMap) {
+		return burgerdao.getBurgerList(dataMap);
 	}
-
+	
 	@Override
 	public List<DivisionVO> getDivisionList() {
 		// TODO Auto-generated method stub
 		return burgerdao.getDivisionList();
 	}
+
+
 	
 }
