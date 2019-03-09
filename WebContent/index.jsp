@@ -65,9 +65,9 @@
             </div>
             <div class="col-12 col-md-4 col-lg-4">
               <select class="custom-select" id="brandSelect">
-                <option selected>브랜드 선택</option>
+                <option value="" selected>브랜드 선택</option>
  			  <c:forEach var="brand" items="${brandList}">
- 			  	<option value="1">${brand.contents}</option>
+ 			  	<option value="${brand.contents}">${brand.contents}</option>
 			  </c:forEach>
               </select>
             </div>
@@ -75,9 +75,9 @@
             </div>
             <div class="col-12 col-md-4 col-lg-4">
               <select class="custom-select" id="menuSelect">
-                <option selected>메뉴 선택</option>
+                <option value="" selected>메뉴 선택</option>
  			  <c:forEach var="menu" items="${menuList}">
- 			  	<option value="1">${menu.contents}</option>
+ 			  	<option value="${menu.contents}">${menu.contents}</option>
 			  </c:forEach>
               </select>
             </div>
@@ -92,9 +92,9 @@
             </div>
             <div class="col-12 col-md-4">
               <select class="custom-select" id="priceSelect">
-              <option selected>가격 선택</option>
+              <option value="" selected>가격 선택</option>
  			  <c:forEach var="price" items="${priceList}">
- 			  	<option value="1">${price.contents}</option>
+ 			  	<option value="${price.contents}">${price.contents}</option>
 			  </c:forEach>
               </select>
             </div>
@@ -102,9 +102,9 @@
             </div>
             <div class="col-12 col-md-4">
               <select class="custom-select" id="calorySelect">
-                <option selected>칼로리 선택</option>
+                <option value="" selected>칼로리 선택</option>
  			  <c:forEach var="calory" items="${caloryList}">
- 			  	<option value="1">${calory.contents}</option>
+ 			  	<option value="${calory.contents}">${calory.contents}</option>
 			  </c:forEach>
               </select>
             </div>
@@ -133,16 +133,16 @@
         
       </div>
       <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
+        <ul class="pagination justify-content-center" id="pageItem">
+<!--           <li class="page-item disabled"> -->
+<!--             <a class="page-link" href="#" tabindex="-1">Previous</a> -->
+<!--           </li> -->
+<!--           <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+<!--           <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!--           <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+<!--           <li class="page-item"> -->
+<!--             <a class="page-link" href="#">Next</a> -->
+<!--           </li> -->
         </ul>
       </nav>
     </div>
@@ -241,33 +241,69 @@
         
 // 	});
 	
-	// 조회
+	
+	// 페이징 버튼 눌렀을 때
+	
+	
+	// search 버튼 눌렀을 때
 	$("#submit").click(function() {
 
 		var sendData = {};
-        sendData.brandList = $( "#brandSelect option:selected" ).text();
-    	sendData.menuSelect = $( "#menuSelect option:selected" ).text(); 
-        sendData.priceSelect = $( "#priceSelect option:selected" ).text(); 
-        sendData.calorySelect = $( "#calorySelect option:selected" ).text();
+        sendData.brandList = $( "#brandSelect option:selected" ).val();
+    	sendData.menuSelect = $( "#menuSelect option:selected" ).val(); 
+        sendData.priceSelect = $( "#priceSelect option:selected" ).val(); 
+        sendData.calorySelect = $( "#calorySelect option:selected" ).val();
         var requestData = sendData;
         console.log(requestData);
-		
+    	
+        $( "#cardRow" ).empty();
+        $( "#pageItem" ).empty();
+        
 		$.ajax({
-	        url : "/burgers",
+	        url : "/burgers/totalCount",
 	        type: "post",
 	        dataType : "json",
 	        data: JSON.stringify(requestData),
 	        contentType:'application/json; charset=utf-8',
 	        success : function(resData){
-	        	console.log("성공");
-	        	console.log(resData);
+	        	requestData.totalCount = resData.total_count;
+	        	var pageSize = 6;
+	        	var pageTotal = (parseInt(resData.total_count / pageSize) );
+	        	var remainObj = (parseInt(resData.total_count % pageSize) );
+	        	if(remainObj != 0){
+	        		pageTotal = pageTotal + 1;
+	        	}
+	        	
+	        	requestData.pageSize = pageSize;
+	        	requestData.pageTotal = pageTotal;
+	        	requestData.remainObj = remainObj;
+	        	console.log(requestData);
+				var pageMarkup = "";
+				for(var pn=1; pn<=pageTotal; pn++ ){
+					pageMarkup += '<li class="page-item"><a class="page-link" href="/burgers/'+pn+'">'+pn+'</a></li>';
+				}
+				console.log(pageMarkup);
+				$("#pageItem").append(pageMarkup);
+	        	selectBurgerList(requestData);
+	        }
+	    });
+	});
+	
+	function selectBurgerList(sendData){
+		$.ajax({
+	        url : "/burgers",
+	        type: "post",
+	        dataType : "json",
+	        data: JSON.stringify(sendData),
+	        contentType:'application/json; charset=utf-8',
+	        success : function(resData){
 	        	var markup = '<div class="col-md-4">';
 	        		markup += '<div class="card mb-4 shadow-sm">';
 	 	            markup += '<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">';
 	                markup += '<title>Placeholder</title>';
 	                markup += '<rect width="100%" height="100%" fill="#f2f2f2">';
 	                markup += '</rect>';
-        	
+    	
 	            var markup3 = '</svg>';
 		            markup3 += '<div class="card-body">';
 		            markup3 += '<table class="table">';
@@ -278,13 +314,13 @@
 		            markup3 += '</tr>';
 		            markup3 += '</thead>';
 		            markup3 += '<tbody>';
-				  
+			  
 				  var markup5 = '</tbody>';
 				  markup5 += '</table>';
 				  markup5 += '</div>';
 				  markup5 += '</div>';
 				  markup5 += '</div>';
-	        	
+        	
 	        	var newMarkUp = "";
 	        	for(var i=0; i<resData.length; i++){
 	        		console.log(resData[i].menu_name);
@@ -292,12 +328,12 @@
 	        		console.log(resData[i].single_price);
 	        		console.log(resData[i].set_price);
 	        		console.log(resData[i].calory);
-	        		
+        		
 	                var markup2 = '<image xlink:href="'+resData[i].img_url+'" height="100%" width="100%"></image>';
-	          	  
+          	  
 			        var markup4 = '<tr>';
 					  markup4 += '<td>브랜드</td>';
-					  markup4 += '<td>맥도날드</td>';
+					  markup4 += '<td>'+resData[i].chain_name+'</td>';
 					  markup4 += '</tr>';
 					  markup4 += '<tr>';
 					  markup4 += '<td>메뉴명</td>';
@@ -315,16 +351,15 @@
 					  markup4 += '<td>칼로리</td>';
 					  markup4 += '<td>'+resData[i].calory+'</td>';
 					  markup4 += '</tr>';
-					  
+				  
 	        		newMarkUp += markup + markup2 + markup3 + markup4 + markup5;
-	        		
 	        	}
-	        	
 	        	console.log(newMarkUp);
 	        	$("#cardRow").append(newMarkUp);
 	        }
 	    });
-	});
+	}
+	
 	</script>
 </body>
 

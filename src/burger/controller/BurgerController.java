@@ -26,4 +26,11 @@ public class BurgerController {
 		List<BurgerVO> burgerList = burgerService.getBurgerList(dataMap);
 		return burgerList;
 	}
+
+	@RequestMapping(value="/totalCount", method=RequestMethod.POST)
+	@ResponseBody
+	public BurgerVO getBurgerTotalCount(@RequestBody Map<String, Object> dataMap) {
+		BurgerVO totalCount = burgerService.getBurgerTotalCount(dataMap);
+		return totalCount;
+	}
 }

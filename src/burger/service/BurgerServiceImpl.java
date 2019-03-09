@@ -32,6 +32,12 @@ public class BurgerServiceImpl implements BurgerService{
 		return burgerdao.getDivisionList();
 	}
 
+	@Override
+	public BurgerVO getBurgerTotalCount(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return burgerdao.getBurgerTotalCount(dataMap);
+	}
+
 
 	
 }

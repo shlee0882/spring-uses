@@ -24,6 +24,28 @@ public class BurgerDaoImpl implements BurgerDao {
 
 	@Override
 	public List<BurgerVO> getBurgerList(Map<String, Object> dataMap) {
+		String prStartVal ="";
+		String prEndVal ="";
+		String calStartVal ="";
+		String calEndVal ="";
+		
+		if(!"".equals(dataMap.get("priceSelect"))) {
+			String priceDivide = (String) dataMap.get("priceSelect");
+			prStartVal = priceDivide.substring(0, priceDivide.indexOf("~"));
+			prEndVal= priceDivide.substring(priceDivide.indexOf("~")+1);
+		}
+
+		if(!"".equals(dataMap.get("calorySelect"))) {
+			String caloryDivide = (String) dataMap.get("calorySelect");
+			calStartVal = caloryDivide.substring(0, caloryDivide.indexOf("~"));
+			calEndVal= caloryDivide.substring(caloryDivide.indexOf("~")+1);
+		}
+		
+		dataMap.put("priceSt", prStartVal);
+		dataMap.put("priceEnd", prEndVal);
+		dataMap.put("calSt", calStartVal);
+		dataMap.put("calEnd", calEndVal);
+		
 		List<BurgerVO> burgerList = session.selectList("burgerNS.selectBurgerList", dataMap);
 		return burgerList;
 	}
@@ -32,6 +54,12 @@ public class BurgerDaoImpl implements BurgerDao {
 	public List<DivisionVO> getDivisionList() {
 		List<DivisionVO> divisionList = session.selectList("burgerNS.selectDivisionList");
 		return divisionList;
+	}
+
+	@Override
+	public BurgerVO getBurgerTotalCount(Map<String, Object> dataMap) {
+		BurgerVO getBurgerTotalCount = session.selectOne("burgerNS.selectBurgerTotalCount", dataMap);
+		return getBurgerTotalCount;
 	}
 
 

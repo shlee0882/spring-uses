@@ -13,4 +13,6 @@ public interface BurgerService {
 	public List<BurgerVO> getBurgerList(Map<String, Object> dataMap);
 
 	public List<DivisionVO> getDivisionList();
+
+	public BurgerVO getBurgerTotalCount(Map<String, Object> dataMap);
 }
