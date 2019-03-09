@@ -33,8 +33,8 @@ public class MyBatisTest {
 	// 조회
 	@Test @Ignore
 	public void getMenuList() {
-		List<BurgerVO> burgerList = burgerService.getBurgerList();
-		System.out.println(burgerList);
+//		List<BurgerVO> burgerList = burgerService.getBurgerList();
+//		System.out.println(burgerList);
 	}
 	
 	// 항목 조회

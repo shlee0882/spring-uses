@@ -1,6 +1,7 @@
 package burger.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,17 @@ public class BurgerDaoImpl implements BurgerDao {
 	}
 
 	@Override
-	public List<BurgerVO> getBurgerList() {
-		List<BurgerVO> burgerList = session.selectList("burgerNS.selectBurgerList");
+	public List<BurgerVO> getBurgerList(Map<String, Object> dataMap) {
+		List<BurgerVO> burgerList = session.selectList("burgerNS.selectBurgerList", dataMap);
 		return burgerList;
 	}
-
+	
 	@Override
 	public List<DivisionVO> getDivisionList() {
 		List<DivisionVO> divisionList = session.selectList("burgerNS.selectDivisionList");
 		return divisionList;
 	}
+
 
 	
 }

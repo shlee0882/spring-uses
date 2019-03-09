@@ -64,7 +64,7 @@
             <div class="col-12 col-md-1 col-lg-1">
             </div>
             <div class="col-12 col-md-4 col-lg-4">
-              <select class="custom-select" id="inputGroupSelect02">
+              <select class="custom-select" id="brandSelect">
                 <option selected>브랜드 선택</option>
  			  <c:forEach var="brand" items="${brandList}">
  			  	<option value="1">${brand.contents}</option>
@@ -74,7 +74,7 @@
             <div class="col-12 col-md-2 col-lg-2">
             </div>
             <div class="col-12 col-md-4 col-lg-4">
-              <select class="custom-select" id="inputGroupSelect02">
+              <select class="custom-select" id="menuSelect">
                 <option selected>메뉴 선택</option>
  			  <c:forEach var="menu" items="${menuList}">
  			  	<option value="1">${menu.contents}</option>
@@ -91,7 +91,7 @@
             <div class="col-12 col-md-1 col-lg-1">
             </div>
             <div class="col-12 col-md-4">
-              <select class="custom-select" id="inputGroupSelect02">
+              <select class="custom-select" id="priceSelect">
               <option selected>가격 선택</option>
  			  <c:forEach var="price" items="${priceList}">
  			  	<option value="1">${price.contents}</option>
@@ -101,7 +101,7 @@
             <div class="col-12 col-md-2 col-lg-2">
             </div>
             <div class="col-12 col-md-4">
-              <select class="custom-select" id="inputGroupSelect02">
+              <select class="custom-select" id="calorySelect">
                 <option selected>칼로리 선택</option>
  			  <c:forEach var="calory" items="${caloryList}">
  			  	<option value="1">${calory.contents}</option>
@@ -219,11 +219,47 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script>
 
+	
+//     function ptcpEvent(sendData){
+//         var url = "@RequestMapping될 url 명시";
+//         var type   = "json";
+//         var requestData = sendData;
+//         console.log(JSON.stringify(requestData));
+//         processScript = false;
+//         myCommon.util.callAjax("POST", url, null,requestData, returnData.myResult);
+//     };
+	
+// 	$(document).ready(function() {
+// 		var sendData = {};
+//         sendData.brandList = brandList;
+//     	sendData.menuSelect = menuSelect;
+//         sendData.priceSelect = priceSelect;
+//         sendData.calorySelect = calorySelect;
+//         var requestData = sendData;
+//         coonsole.log(requestData);
+//         console.log(JSON.stringify(requestData));
+        
+// 	});
+	
+	// 조회
 	$("#submit").click(function() {
-	    $.ajax({
+
+		var sendData = {};
+        sendData.brandList = $( "#brandSelect option:selected" ).text();
+    	sendData.menuSelect = $( "#menuSelect option:selected" ).text(); 
+        sendData.priceSelect = $( "#priceSelect option:selected" ).text(); 
+        sendData.calorySelect = $( "#calorySelect option:selected" ).text();
+        var requestData = sendData;
+        console.log(requestData);
+		
+		$.ajax({
 	        url : "/burgers",
-	        type: "get",
+	        type: "post",
+	        dataType : "json",
+	        data: JSON.stringify(requestData),
+	        contentType:'application/json; charset=utf-8',
 	        success : function(resData){
+	        	console.log("성공");
 	        	console.log(resData);
 	        	var markup = '<div class="col-md-4">';
 	        		markup += '<div class="card mb-4 shadow-sm">';
