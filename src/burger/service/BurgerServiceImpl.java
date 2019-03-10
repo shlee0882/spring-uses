@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import burger.dao.BurgerDao;
+import burger.vo.AdminVO;
 import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
 
@@ -36,6 +37,12 @@ public class BurgerServiceImpl implements BurgerService{
 	public BurgerVO getBurgerTotalCount(Map<String, Object> dataMap) {
 		// TODO Auto-generated method stub
 		return burgerdao.getBurgerTotalCount(dataMap);
+	}
+
+	@Override
+	public AdminVO getLoginRequest(Map<String, Object> dataMap) throws Exception {
+		// TODO Auto-generated method stub
+		return burgerdao.getLoginRequest(dataMap);
 	}
 
 

@@ -47,7 +47,7 @@
   <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
       <a class="navbar-brand" href="#">BurgerInfo</a>
-      <a class="btn btn-primary" href="#">Admin Login</a>
+      <a class="btn btn-primary" href="/login" >Admin Login</a>
     </div>
   </nav>
   <!-- Masthead -->
@@ -125,8 +125,8 @@
   </div>
 </header>
 
-
-<div class="album py-5 bg-light">
+<!-- py-5 -->
+<div class="album py-4 bg-light" id="middleMenu">
   <div class="container">
 
     <div class="row" id="cardRow">
@@ -218,32 +218,25 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script>
-
-	
-//     function ptcpEvent(sendData){
-//         var url = "@RequestMapping될 url 명시";
-//         var type   = "json";
-//         var requestData = sendData;
-//         console.log(JSON.stringify(requestData));
-//         processScript = false;
-//         myCommon.util.callAjax("POST", url, null,requestData, returnData.myResult);
-//     };
-	
-// 	$(document).ready(function() {
-// 		var sendData = {};
-//         sendData.brandList = brandList;
-//     	sendData.menuSelect = menuSelect;
-//         sendData.priceSelect = priceSelect;
-//         sendData.calorySelect = calorySelect;
-//         var requestData = sendData;
-//         coonsole.log(requestData);
-//         console.log(JSON.stringify(requestData));
-        
-// 	});
-	
 	
 	// 페이징 버튼 눌렀을 때
-	
+	function pageFunction(pageNum){
+		console.log(pageNum);
+        $( ".page-link").css( "background", "" );
+        $( "#pageData" + pageNum ).css( "background", "lightskyblue" );
+		pageNum = pageNum-1;
+		var sendData = {};
+        sendData.brandList = $( "#brandSelect option:selected" ).val();
+    	sendData.menuSelect = $( "#menuSelect option:selected" ).val(); 
+        sendData.priceSelect = $( "#priceSelect option:selected" ).val(); 
+        sendData.calorySelect = $( "#calorySelect option:selected" ).val();
+        sendData.pageNum = pageNum;
+        var requestData = sendData;
+        console.log(requestData);
+        
+        $( "#cardRow" ).empty();
+        selectBurgerList(requestData);
+	}
 	
 	// search 버튼 눌렀을 때
 	$("#submit").click(function() {
@@ -267,6 +260,7 @@
 	        contentType:'application/json; charset=utf-8',
 	        success : function(resData){
 	        	requestData.totalCount = resData.total_count;
+	        	var pageNum = 0;
 	        	var pageSize = 6;
 	        	var pageTotal = (parseInt(resData.total_count / pageSize) );
 	        	var remainObj = (parseInt(resData.total_count % pageSize) );
@@ -274,14 +268,16 @@
 	        		pageTotal = pageTotal + 1;
 	        	}
 	        	
+	        	requestData.pageNum = pageNum;
 	        	requestData.pageSize = pageSize;
 	        	requestData.pageTotal = pageTotal;
 	        	requestData.remainObj = remainObj;
 	        	console.log(requestData);
 				var pageMarkup = "";
 				for(var pn=1; pn<=pageTotal; pn++ ){
-					pageMarkup += '<li class="page-item"><a class="page-link" href="/burgers/'+pn+'">'+pn+'</a></li>';
+					pageMarkup += '<li class="page-item"><a class="page-link nav-link js-scroll-trigger" href="#middleMenu" onclick="pageFunction('+pn+');" return false;" id="pageData'+pn+'">'+pn+'</a></li>';
 				}
+
 				console.log(pageMarkup);
 				$("#pageItem").append(pageMarkup);
 	        	selectBurgerList(requestData);
@@ -290,6 +286,7 @@
 	});
 	
 	function selectBurgerList(sendData){
+		
 		$.ajax({
 	        url : "/burgers",
 	        type: "post",
@@ -354,8 +351,13 @@
 				  
 	        		newMarkUp += markup + markup2 + markup3 + markup4 + markup5;
 	        	}
-	        	console.log(newMarkUp);
 	        	$("#cardRow").append(newMarkUp);
+	        	console.log(sendData);
+	        	if(sendData.pageNum == 0){
+		        	$( ".page-link").css( "background", "" );
+			        $( "#pageData" + 1).css( "background", "lightskyblue" );
+	        	}
+		        
 	        }
 	    });
 	}

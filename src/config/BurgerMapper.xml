@@ -56,6 +56,15 @@
 	</select>
 
 
+	<select id="selectLoginRequest" parameterType="map" resultType="Admin">
+	SELECT a.admin_no
+			  , a.name
+			  , a.use_active
+      FROM admin_user a
+    WHERE a.id = #{idVal}
+		 AND a.pass = #{passVal}
+	</select>
+
 
 </mapper>
  
