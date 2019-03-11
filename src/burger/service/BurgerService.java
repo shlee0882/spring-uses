@@ -18,4 +18,6 @@ public interface BurgerService {
 	public BurgerVO getBurgerTotalCount(Map<String, Object> dataMap);
 
 	public AdminVO getLoginRequest(Map<String, Object> dataMap) throws Exception;
+
+	public List<BurgerVO> getAllBurgerList();
 }

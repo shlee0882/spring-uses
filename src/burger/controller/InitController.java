@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import burger.service.BurgerService;
 import burger.vo.AdminVO;
+import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
 
 @Controller
@@ -60,7 +61,13 @@ public class InitController {
 	@RequestMapping(value="loginRequest", method=RequestMethod.POST)
 	public String getLoginRequest(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
 		AdminVO result = burgerService.getLoginRequest(dataMap);
+		
+		List<BurgerVO> allBurgerList = burgerService.getAllBurgerList();
+		
+		model.addAttribute("allBurgerList", allBurgerList);
 		model.addAttribute("result", result);
+		
+		
 		return "adminPage.jsp";
 	}
 	

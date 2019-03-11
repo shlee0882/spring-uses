@@ -6,6 +6,7 @@ import lombok.Data;
 public class BurgerVO {
 
 	  private Integer product_no;			//	제품번호
+	  private String chain_no;     			//	체인번호
 	  private String chain_name;     	//	체인명
 	  private String menu_name;      	//	메뉴명
 	  private String single_price;			//	단품가격
