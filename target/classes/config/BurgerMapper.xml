@@ -68,6 +68,7 @@
 	<select id="selectAllBurgerList" resultType="Burger">
 	    SELECT a.chain_no 
 	    		 , a.chain_name
+		         , b.product_no
 		         , b.menu_name
 		         , b.single_price
 		         , b.set_price
@@ -77,6 +78,17 @@
 	 INNER JOIN products b
 	        ON a.chain_no = b.chain_no
 	</select>
+
+	<update id="updateBurger" parameterType="map" >
+	UPDATE products
+	      SET chain_no = #{chain_no}
+		      , menu_name = #{menu_name}
+		      , single_price = #{single_price}
+		      , set_price = #{set_price}
+		      , calory = #{calory}
+		      , img_url = #{img_url}
+	WHERE product_no = #{product_no}
+	</update>
 
 
 </mapper>

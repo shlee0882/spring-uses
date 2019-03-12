@@ -58,7 +58,7 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="adminPage.jsp">
+        <a class="nav-link" href="/getBurgerList">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>조회 / 변경</span>
         </a>

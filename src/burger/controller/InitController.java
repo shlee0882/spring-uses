@@ -63,12 +63,26 @@ public class InitController {
 		AdminVO result = burgerService.getLoginRequest(dataMap);
 		
 		List<BurgerVO> allBurgerList = burgerService.getAllBurgerList();
-		
 		model.addAttribute("allBurgerList", allBurgerList);
 		model.addAttribute("result", result);
 		
-		
 		return "adminPage.jsp";
+	}
+	
+	
+	@RequestMapping("getBurgerList")
+	public String getUserList(Model model) {
+		List<BurgerVO> allBurgerList = burgerService.getAllBurgerList();
+		model.addAttribute("allBurgerList", allBurgerList);
+		return "adminPage.jsp";
+	}
+	
+	@RequestMapping(value="updateBurger", method=RequestMethod.POST)
+	@ResponseBody
+	public BurgerVO updateBurger(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
+		BurgerVO result =  burgerService.updateBurger(dataMap);
+		model.addAttribute("result", result);
+		return result;
 	}
 	
 }

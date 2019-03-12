@@ -18,6 +18,6 @@ public class BurgerVO {
 	  private String store_name;     		//	점포명
 	  private String area_code;      		//	지역코드
 	  private String total_count;      		//	제품 총 갯수
-	  
+	  private Integer result;					// 결과
 	
 }

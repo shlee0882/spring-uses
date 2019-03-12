@@ -20,4 +20,6 @@ public interface BurgerService {
 	public AdminVO getLoginRequest(Map<String, Object> dataMap) throws Exception;
 
 	public List<BurgerVO> getAllBurgerList();
+
+	public BurgerVO updateBurger(Map<String, Object> dataMap);
 }

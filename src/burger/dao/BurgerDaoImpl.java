@@ -59,6 +59,17 @@ public class BurgerDaoImpl implements BurgerDao {
 		return allBurgerList;
 	}
 
+	@Override
+	public BurgerVO updateBurger(Map<String, Object> dataMap) {
+		BurgerVO burgerVO = new BurgerVO();
+		int result = session.update("burgerNS.updateBurger",dataMap);
+		System.out.println("°á°ú°ª : "+result);
+		return burgerVO;
+		
+	}
+
+
+
 
 	
 }

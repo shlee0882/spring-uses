@@ -83,6 +83,12 @@ public class BurgerServiceImpl implements BurgerService{
 		return burgerdao.getAllBurgerList();
 	}
 
+	@Override
+	public BurgerVO updateBurger(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return burgerdao.updateBurger(dataMap);
+	}
+
 
 	
 }

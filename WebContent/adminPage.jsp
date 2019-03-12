@@ -95,12 +95,14 @@
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
+						<form id="tableForm" action="/updateBurger" method="post">
 							<table class="table table-bordered" id="dataTable" width="100%"
 								cellspacing="0">
 								<thead>
 									<tr>
 										<th>체인번호</th>
-										<th>브랜드</th>
+										<th rowspan="2">브랜드</th>
+<!-- 										<th style="display:none;">브랜드</th> -->
 										<th>메뉴명</th>
 										<th>단품가격</th>
 										<th>세트가격</th>
@@ -110,10 +112,13 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="burger" items="${allBurgerList}">
+									<c:forEach var="burger" items="${allBurgerList}" varStatus="status">
 										<tr>
 											<td><input type="number" name="chain_no" value="${burger.chain_no}" style="width: 30px;"/></td>
 											<td>${burger.chain_name}</td>
+											<td style="display:none;">
+												<input type="hidden" name="product_no" value="${burger.product_no}" />
+											</td>
 											<td>
 												<input type="text" name="menu_name" value="${burger.menu_name}" />
 												<span name="menuNm">${burger.menu_name}</span>
@@ -134,11 +139,14 @@
 												<input type="text" name="img_url" value="${burger.img_url}" style="width: 100px;"/>
 												<span name="imgUr">${burger.img_url}</span>
 											</td>
-											<td><button>저장</button></td>
+											<td>
+												<button type="submit" value="Submit">저장</button>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
+							</form>
 						</div>
 					</div>
 					<div class="card-footer small text-muted">Updated yesterday
@@ -199,7 +207,7 @@
 	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Page level plugin JavaScript-->
-	<script src="vendor/chart.js/Chart.min.js"></script>
+<!-- 	<script src="vendor/chart.js/Chart.min.js"></script> -->
 	<script src="vendor/datatables/jquery.dataTables.js"></script>
 	<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
@@ -208,14 +216,31 @@
 
 	<!-- Demo scripts for this page-->
 	<script src="js/demo/datatables-demo.js"></script>
-	<script src="js/demo/chart-area-demo.js"></script>
-	<script>
+<!-- 	<script src="js/demo/chart-area-demo.js"></script> -->
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#tableForm').submit(function() {
+	        $.ajax({
+	            type: 'POST',
+	            url: $(this).attr('action'),
+	            data: $(this).serialize(),
+	            dataType: 'json',
+	            success: function(json) {
+	            	alert("변경에 성공했습니다.");
+	            },
+	            error:function(){
+	            	alert("변경에 실패했습니다.");
+	            }
+	        })
+	        return false;
+	    });
+	    
 		$("span[name=menuNm]").hide();
 		$("span[name=singlePr]").hide();
 		$("span[name=setPr]").hide();
 		$("span[name=cal]").hide();
 		$("span[name=imgUr]").hide();
-// 		$("#menuNm").hide();
+	});
 	</script>
 </body>
 </html>
