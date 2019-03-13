@@ -90,6 +90,16 @@
 	WHERE product_no = #{product_no}
 	</update>
 
+	<insert id="insertBurger" parameterType="map">
+	INSERT INTO products(chain_no, menu_name, single_price, set_price, calory, display_yn, img_url)
+	VALUES(#{chain_no}
+			  , #{menu_name}
+			  , #{single_price}
+			  , #{set_price}
+			  , #{calory}
+			  , #{display_yn}
+			  , #{img_url})
+	</insert>
 
 </mapper>
  

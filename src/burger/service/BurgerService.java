@@ -22,4 +22,6 @@ public interface BurgerService {
 	public List<BurgerVO> getAllBurgerList();
 
 	public BurgerVO updateBurger(Map<String, Object> dataMap);
+
+	public BurgerVO insertBurger(Map<String, Object> dataMap);
 }

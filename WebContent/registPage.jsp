@@ -64,7 +64,7 @@
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="registPage.jsp">
+        <a class="nav-link" href="/registPage">
           <i class="fas fa-fw fa-table"></i>
           <span>등록</span></a>
       </li>
@@ -76,52 +76,65 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Charts</li>
+          <li class="breadcrumb-item active">등록</li>
         </ol>
 
-        <!-- Area Chart Example-->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-chart-area"></i>
-            Area Chart Example</div>
-          <div class="card-body">
-            <canvas id="myAreaChart" width="100%" height="30"></canvas>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="card mb-3">
-              <div class="card-header">
-                <i class="fas fa-chart-bar"></i>
-                Bar Chart Example</div>
-              <div class="card-body">
-                <canvas id="myBarChart" width="100%" height="50"></canvas>
-              </div>
-              <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card mb-3">
-              <div class="card-header">
-                <i class="fas fa-chart-pie"></i>
-                Pie Chart Example</div>
-              <div class="card-body">
-                <canvas id="myPieChart" width="100%" height="100"></canvas>
-              </div>
-              <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            </div>
-          </div>
-        </div>
-
-        <p class="small text-center text-muted my-5">
-          <em>More chart examples coming soon...</em>
-        </p>
-
+				<!-- DataTables Example -->
+				<div class="card mb-3">
+					<div class="card-header">
+						<i class="fas fa-table"></i> 상품 등록
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+						<form id="tableForm" action="/updateBurger" method="post">
+							<table class="table table-bordered" id="dataTable" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										<th width="30%">항목</th>
+										<th width="70%">내용</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+											<td>체인명</td>
+											<td><input type="text" name="menu_name" /></td>
+										</tr>
+										<tr>
+											<td>메뉴명</td>
+											<td><input type="text" name="menu_name" /></td>
+										</tr>
+										<tr>
+											<td>단품가격</td>
+											<td><input type="text" name="single_price" /></td>
+										</tr>
+										<tr>
+											<td>세트가격</td>
+											<td><input type="text" name="set_price" /></td>
+										</tr>
+										<tr>
+											<td>칼로리</td>
+											<td>5</td>
+										</tr>
+										<tr>
+											<td>전시여부</td>
+											<td>6</td>
+										</tr>
+										<tr>
+											<td>이미지url</td>
+											<td>7</td>
+										</tr>
+										<tr>
+											<td colspan="2"><button>저장</button></td>
+										</tr>
+								</tbody>
+							</table>
+							</form>
+						</div>
+					</div>
+					<div class="card-footer small text-muted">Updated yesterday
+						at 11:59 PM</div>
+				</div>
       </div>
       <!-- /.container-fluid -->
 

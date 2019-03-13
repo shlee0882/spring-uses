@@ -23,7 +23,11 @@
 
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
-
+<style type="text/css">
+.table1 { display: table; } 
+.table1>* { display: table-row; }
+.table1>*>* { display: table-cell; }
+</style>
 </head>
 <body id="page-top">
 
@@ -95,58 +99,57 @@
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
-						<form id="tableForm" action="/updateBurger" method="post">
 							<table class="table table-bordered" id="dataTable" width="100%"
 								cellspacing="0">
 								<thead>
 									<tr>
-										<th>체인번호</th>
-										<th rowspan="2">브랜드</th>
-<!-- 										<th style="display:none;">브랜드</th> -->
-										<th>메뉴명</th>
-										<th>단품가격</th>
-										<th>세트가격</th>
-										<th>칼로리</th>
-										<th>이미지 경로</th>
-										<th>저장 버튼</th>
+										<th width="10%">체인번호</th>
+										<th width="10%">브랜드</th>
+										<th width="0%"style="display:none;">제품번호</th>
+										<th width="20%">메뉴명</th>
+										<th width="10%">단품가격</th>
+										<th width="10%">세트가격</th>
+										<th width="10%">칼로리</th>
+										<th width="20%">이미지 경로</th>
+										<th width="10%">저장 버튼</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="burger" items="${allBurgerList}" varStatus="status">
 										<tr>
-											<td><input type="number" name="chain_no" value="${burger.chain_no}" style="width: 30px;"/></td>
+											<td><form id="form${status.count}" action="/updateBurger" method="post" name="frmSave"><input type="number" name="chain_no" value="${burger.chain_no}" style="width: 30px;"/></form></td>
 											<td>${burger.chain_name}</td>
 											<td style="display:none;">
-												<input type="hidden" name="product_no" value="${burger.product_no}" />
+												<input form="form${status.count}" style="display:none;" type="hidden" name="product_no" value="${burger.product_no}" />
 											</td>
 											<td>
-												<input type="text" name="menu_name" value="${burger.menu_name}" />
+												<input form="form${status.count}" type="text" name="menu_name" value="${burger.menu_name}" />
 												<span name="menuNm">${burger.menu_name}</span>
 											</td>
 											<td>
-												<input type="number" name="single_price" value="${burger.single_price}"  style="width: 100px;"/>
+												<input form="form${status.count}" type="number" name="single_price" value="${burger.single_price}"  style="width: 100px;"/>
 												<span name="singlePr">${burger.single_price}</span>
 											</td>
 											<td>
-												<input type="number" name="set_price" value="${burger.set_price}" style="width: 100px;" />
+												<input form="form${status.count}" type="number" name="set_price" value="${burger.set_price}" style="width: 100px;" />
 												<span name="setPr">${burger.set_price}</span>
 											</td>
 											<td>
-												<input type="number" name="calory" value="${burger.calory}" style="width: 100px;" />
+												<input form="form${status.count}"  type="number" name="calory" value="${burger.calory}" style="width: 100px;" />
 												<span name="cal">${burger.calory}</span>
 											</td>
 											<td>
-												<input type="text" name="img_url" value="${burger.img_url}" style="width: 100px;"/>
+												<input form="form${status.count}" type="text" name="img_url" value="${burger.img_url}" style="width: 100%;"/>
 												<span name="imgUr">${burger.img_url}</span>
 											</td>
 											<td>
-												<button type="submit" value="Submit">저장</button>
+												<button form="form${status.count}" type="submit" value="Submit">저장</button>
 											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							</form>
+
 						</div>
 					</div>
 					<div class="card-footer small text-muted">Updated yesterday
@@ -219,7 +222,7 @@
 <!-- 	<script src="js/demo/chart-area-demo.js"></script> -->
 	<script type="text/javascript">
 	$(document).ready(function() {
-	    $('#tableForm').submit(function() {
+	    $('form[name="frmSave"]').submit(function() {
 	        $.ajax({
 	            type: 'POST',
 	            url: $(this).attr('action'),

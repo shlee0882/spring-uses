@@ -68,6 +68,15 @@ public class BurgerDaoImpl implements BurgerDao {
 		
 	}
 
+	@Override
+	public BurgerVO insertBurger(Map<String, Object> dataMap) {
+		BurgerVO burgerVO = new BurgerVO();
+		int result = session.insert("burgerNS.insertBurger", dataMap);
+		System.out.println("°á°ú°ª : "+result);
+		return burgerVO;
+		
+	}
+
 
 
 

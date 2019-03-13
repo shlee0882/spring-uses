@@ -84,5 +84,14 @@ public class InitController {
 		model.addAttribute("result", result);
 		return result;
 	}
+
+	@RequestMapping(value="insertBurger", method=RequestMethod.POST)
+	@ResponseBody
+	public BurgerVO insertBurger(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
+//		BurgerVO result =  burgerService.insertBurger(dataMap);
+//		model.addAttribute("result", result);
+		System.out.println("123");
+		return null;
+	}
 	
 }

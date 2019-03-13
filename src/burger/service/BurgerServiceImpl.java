@@ -89,6 +89,12 @@ public class BurgerServiceImpl implements BurgerService{
 		return burgerdao.updateBurger(dataMap);
 	}
 
+	@Override
+	public BurgerVO insertBurger(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return burgerdao.insertBurger(dataMap);
+	}
+
 
 	
 }
