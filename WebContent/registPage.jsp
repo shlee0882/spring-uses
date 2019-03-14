@@ -114,15 +114,15 @@
 										</tr>
 										<tr>
 											<td>칼로리</td>
-											<td>5</td>
+											<td><input type="text" name="set_price" /></td>
 										</tr>
 										<tr>
 											<td>전시여부</td>
-											<td>6</td>
+											<td><input type="text" name="set_price" /></td>
 										</tr>
 										<tr>
 											<td>이미지url</td>
-											<td>7</td>
+											<td><input type="text" name="set_price" /></td>
 										</tr>
 										<tr>
 											<td colspan="2"><button>저장</button></td>
