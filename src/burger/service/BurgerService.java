@@ -3,6 +3,8 @@ package burger.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import burger.vo.AdminVO;
 import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
@@ -23,5 +25,5 @@ public interface BurgerService {
 
 	public BurgerVO updateBurger(Map<String, Object> dataMap);
 
-	public BurgerVO insertBurger(Map<String, Object> dataMap);
+	public void insertBurger(Map<String, Object> dataMap, HttpServletRequest request);
 }

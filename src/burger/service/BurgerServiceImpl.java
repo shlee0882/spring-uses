@@ -1,10 +1,16 @@
 package burger.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import burger.dao.BurgerDao;
 import burger.vo.AdminVO;
@@ -90,9 +96,21 @@ public class BurgerServiceImpl implements BurgerService{
 	}
 
 	@Override
-	public BurgerVO insertBurger(Map<String, Object> dataMap) {
-		// TODO Auto-generated method stub
-		return burgerdao.insertBurger(dataMap);
+	public void insertBurger(Map<String, Object> dataMap, HttpServletRequest request) {
+	    MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    MultipartFile multipartFile = null;
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+//	            log.debug("------------- file start -------------");
+//	            log.debug("name : "+multipartFile.getName());
+//	            log.debug("filename : "+multipartFile.getOriginalFilename());
+//	            log.debug("size : "+multipartFile.getSize());
+//	            log.debug("-------------- file end --------------\n");
+	        }
+	    }
+
 	}
 
 

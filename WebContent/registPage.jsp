@@ -86,7 +86,7 @@
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
-						<form id="tableForm" action="/updateBurger" method="post">
+						<form id="tableForm" name="tableForm" action="/upload" method="post" enctype="multipart/form-data" >
 							<table class="table table-bordered" id="dataTable" width="100%"
 								cellspacing="0">
 								<thead>
@@ -122,10 +122,11 @@
 										</tr>
 										<tr>
 											<td>이미지url</td>
-											<td><input type="text" name="set_price" /></td>
+											<td><input type="file" name="file"></td>
 										</tr>
 										<tr>
-											<td colspan="2"><button>저장</button></td>
+											<td><input type="text" name="test"></td>
+											<td><button>저장</button></td>
 										</tr>
 								</tbody>
 							</table>
