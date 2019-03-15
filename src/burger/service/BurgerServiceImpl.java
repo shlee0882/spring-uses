@@ -96,22 +96,12 @@ public class BurgerServiceImpl implements BurgerService{
 	}
 
 	@Override
-	public void insertBurger(Map<String, Object> dataMap, HttpServletRequest request) {
-	    MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-	    MultipartFile multipartFile = null;
-	    while(iterator.hasNext()){
-	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-	        if(multipartFile.isEmpty() == false){
-//	            log.debug("------------- file start -------------");
-//	            log.debug("name : "+multipartFile.getName());
-//	            log.debug("filename : "+multipartFile.getOriginalFilename());
-//	            log.debug("size : "+multipartFile.getSize());
-//	            log.debug("-------------- file end --------------\n");
-	        }
-	    }
-
+	public BurgerVO insertBurger(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return burgerdao.insertBurger(dataMap);
 	}
+
+
 
 
 	

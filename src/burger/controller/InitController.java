@@ -97,28 +97,12 @@ public class InitController {
 		return result;
 	}
 
-	@RequestMapping(value="upload", method=RequestMethod.POST)
-	public ModelAndView insertBoard(MultipartFile file, ModelAndView mv) throws Exception{
-		System.out.println( "파일이름 :"+file.getOriginalFilename());
-		System.out.println( "파일크기 : "+file.getSize());
-		System.out.println( "컨텐트 타입 : "+file.getContentType());
-		
-		
-		// 이미지 imgur에 뭘 넘겨야 하는지 확인하고 값 넘기기
-		// 업로드 되는지 확인
-		
-//        String savedName = file.getOriginalFilename();
-
-//        File target = new File(uploadPath, savedName);
-
-        // 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
-        // FileCopyUtils.copy(바이트배열, 파일객체)
-//        FileCopyUtils.copy(file.getBytes(), target);
-
-//        mav.setViewName("upload/uploadResult");
-//        mav.addObject("savedName", savedName);
-
-	    return null;
+	@RequestMapping(value="insertBurger", method=RequestMethod.POST)
+	@ResponseBody
+	public String insertBurger(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
+		BurgerVO result =  burgerService.insertBurger(dataMap);
+		model.addAttribute("result", result);
+		return "registPage.jsp";
 	}
 
 

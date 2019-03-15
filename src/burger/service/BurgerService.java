@@ -25,5 +25,6 @@ public interface BurgerService {
 
 	public BurgerVO updateBurger(Map<String, Object> dataMap);
 
-	public void insertBurger(Map<String, Object> dataMap, HttpServletRequest request);
+	public BurgerVO insertBurger(Map<String, Object> dataMap);
+
 }
