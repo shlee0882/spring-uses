@@ -65,6 +65,16 @@
 		 AND a.pass = #{passVal}
 	</select>
 
+	<select id="loginRequest" parameterType="map" resultType="Auth">
+	SELECT a.admin_no
+			  , a.name
+			  , a.id
+			  , a.use_active
+      FROM admin_user a
+    WHERE a.id = #{idVal}
+		 AND a.pass = #{passVal}
+	</select>
+
 	<select id="selectAllBurgerList" resultType="Burger">
 	    SELECT a.chain_no 
 	    		 , a.chain_name

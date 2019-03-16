@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import burger.vo.AdminVO;
+import burger.vo.AuthInfo;
 import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
 
@@ -26,5 +27,7 @@ public interface BurgerService {
 	public BurgerVO updateBurger(Map<String, Object> dataMap);
 
 	public BurgerVO insertBurger(Map<String, Object> dataMap);
+
+	public AuthInfo loginRequest(Map<String, Object> dataMap);
 
 }

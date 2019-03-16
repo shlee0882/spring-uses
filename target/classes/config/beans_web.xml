@@ -22,4 +22,10 @@
 	
 	<mvc:annotation-driven/>
 
+	<!-- 아래 주석은 Controller에서  포워딩 되는  .jsp 확장자를  생략할 수 있다. -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 </beans>

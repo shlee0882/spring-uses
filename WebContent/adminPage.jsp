@@ -33,7 +33,7 @@
 
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-	<a class="navbar-brand mr-1" href="index.html">Admin Page</a>
+	<a class="navbar-brand mr-1" href="/">Admin Page</a>
 
 	<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
 		id="sidebarToggle" href="#">
@@ -72,7 +72,7 @@
 				href="adminPage.jsp"> <i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>조회 / 변경</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="registPage.jsp">
+			<li class="nav-item"><a class="nav-link" href="/registPage">
 					<i class="fas fa-fw fa-table"></i> <span>등록</span>
 			</a></li>
 		</ul>
@@ -103,15 +103,15 @@
 								cellspacing="0">
 								<thead>
 									<tr>
-										<th width="10%">체인번호</th>
-										<th width="10%">브랜드</th>
+										<th width="15%">체인번호</th>
+										<th width="15%">브랜드</th>
 										<th width="0%"style="display:none;">제품번호</th>
 										<th width="20%">메뉴명</th>
 										<th width="10%">단품가격</th>
 										<th width="10%">세트가격</th>
-										<th width="10%">칼로리</th>
-										<th width="20%">이미지 경로</th>
-										<th width="10%">저장 버튼</th>
+										<th width="5%">칼로리</th>
+										<th width="10%">이미지 경로</th>
+										<th width="15%">저장 버튼</th>
 									</tr>
 								</thead>
 								<tbody>

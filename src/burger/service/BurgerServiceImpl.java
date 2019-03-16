@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import burger.dao.BurgerDao;
 import burger.vo.AdminVO;
+import burger.vo.AuthInfo;
 import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
 
@@ -99,6 +100,12 @@ public class BurgerServiceImpl implements BurgerService{
 	public BurgerVO insertBurger(Map<String, Object> dataMap) {
 		// TODO Auto-generated method stub
 		return burgerdao.insertBurger(dataMap);
+	}
+
+	@Override
+	public AuthInfo loginRequest(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return burgerdao.loginRequest(dataMap);
 	}
 
 

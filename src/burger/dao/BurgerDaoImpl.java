@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import burger.vo.AdminVO;
+import burger.vo.AuthInfo;
 import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
 
@@ -76,6 +77,13 @@ public class BurgerDaoImpl implements BurgerDao {
 		return burgerVO;
 		
 	}
+
+	@Override
+	public AuthInfo loginRequest(Map<String, Object> dataMap) {
+		AuthInfo getLoginRequest = session.selectOne("burgerNS.loginRequest", dataMap);
+		return getLoginRequest;
+	}
+
 
 
 

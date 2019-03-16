@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import burger.vo.AdminVO;
+import burger.vo.AuthInfo;
 import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
 
@@ -23,4 +24,7 @@ public interface BurgerDao {
 	public BurgerVO updateBurger(Map<String, Object> dataMap);
 
 	public BurgerVO insertBurger(Map<String, Object> dataMap);
+
+	public AuthInfo loginRequest(Map<String, Object> dataMap);
+
 }

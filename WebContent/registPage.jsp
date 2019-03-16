@@ -22,13 +22,27 @@
 
 <!-- Custom styles for this template-->
 <link href="css/sb-admin.css" rel="stylesheet">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
+
+<style type="text/css">
+.td_vertical tr td {
+	vertical-align: inherit;
+}
+
+.td_vertical tr td input {
+	width: 220px;
+}
+</style>
 </head>
 
 <body id="page-top">
 
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-	<a class="navbar-brand mr-1" href="index.html">Admin Page</a>
+	<a class="navbar-brand mr-1" href="/">Admin Page</a>
 
 	<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
 		id="sidebarToggle" href="#">
@@ -88,50 +102,68 @@
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
-							<form id="tableForm" name="tableForm" action="/insertBurger" method="post">
+							<form id="tableForm" name="tableForm" class="needs-validation"
+								novalidate>
 								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0" style="margin:auto; display:block; border: 0px;">
+									cellspacing="0"
+									style="margin: auto; display: block; border: 0px;">
 									<thead>
 										<tr>
 											<th width="30%">항목</th>
 											<th width="70%">내용</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody class="td_vertical">
 										<tr>
-											<td>체인번호</td>
-											<td><input type="text" name="chain_no" /></td>
+											<td><label for="chain_no">체인번호</label></td>
+											<td><select class="selectpicker" name="chain_no" id="chain_no">
+													<option value="1">맥도날드</option>
+													<option value="2">롯데리아</option>
+											</select></td>
 										</tr>
 										<tr>
-											<td>메뉴명</td>
-											<td><input type="text" name="menu_name" /></td>
+											<td><label for="menu_name">메뉴명</label></td>
+											<td><input type="text" class="form-control"
+												id="menu_name" name="menu_name" required></td>
 										</tr>
 										<tr>
-											<td>단품가격</td>
-											<td><input type="text" name="single_price" /></td>
+											<td><label for="single_price">단품가격</label></td>
+											<td><input type="number" class="form-control"
+												id="single_price" name="single_price" required></td>
 										</tr>
 										<tr>
-											<td>세트가격</td>
-											<td><input type="text" name="set_price" /></td>
+											<td><label for="set_price">세트가격</label></td>
+											<td><input type="number" class="form-control"
+												id="set_price" name="set_price" required></td>
 										</tr>
 										<tr>
-											<td>칼로리</td>
-											<td><input type="text" name="calory" /></td>
+											<td><label for="calory">칼로리</label></td>
+											<td><input type="number" class="form-control"
+												id="calory" name="calory" required></td>
 										</tr>
 										<tr>
 											<td>전시여부</td>
-											<td><input type="text" name="display_yn" /></td>
+											<td><select class="selectpicker" name="display_yn" id='display_yn'>
+													<option value="Y">Y</option>
+													<option value="N">N</option>
+											</select></td>
 										</tr>
 										<tr>
 											<td>이미지 첨부</td>
-											<td><input type="file" accept="image/*" data-max-size="5000"></td>
+											<td id="imgTd">
+												<input type="file" accept="image/*" data-max-size="5000" id="imgUpload">
+											</td>
 										</tr>
 										<tr>
-											<td>업로드 된 이미지 url </td>
-											<td><input type="text" name="img_url" id="img_url"></td>
+											<td><label for="img_url">업로드 된 이미지 url</label></td>
+											<td><input type="text" class="form-control" id="img_url"
+												name="img_url" placeholder="업로드가 완료되면 url이 나타납니다."
+												style="font-size: 0.7em;" required></td>
 										</tr>
 										<tr>
-											<td colspan="2"><button id="save_button">저장</button></td>
+											<td colspan="2"><button type="button"
+													class="btn btn-secondary" id="save_button"
+													style="float: right;">새 상품 등록</button></td>
 										</tr>
 									</tbody>
 								</table>
@@ -142,8 +174,6 @@
 						at 11:59 PM</div>
 				</div>
 			</div>
-			<!-- /.container-fluid -->
-
 			<!-- Sticky Footer -->
 			<footer class="sticky-footer">
 			<div class="container my-auto">
@@ -199,60 +229,137 @@
 	<!-- Custom scripts for all pages-->
 	<script src="js/sb-admin.min.js"></script>
 
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+
+	<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+	<!-- 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/i18n/defaults-*.min.js"></script> -->
 	<!-- Demo scripts for this page-->
 
 	<script type="text/javascript">
-    $("document").ready(function () {
-        $('input[type=file]').on("change", function () {
-            var $files = $(this).get(0).files;
-            if ($files.length) {
-                // Reject big files
-                if ($files[0].size > $(this).data("max-size") * 1024) {
-                    console.log("Please select a smaller file");
-                    return false;
-                }
-                // Replace ctrlq with your own API key
-                var apiUrl = 'https://api.imgur.com/3/image';
-                var apiKey = '488d9dd87112077';
+		$("document").ready(function() {
+			
+			$('#save_button').click(function() {
+				validEvent();
+				var insVal = false;
+				insVal = insertValidate();
+				console.log(insVal);
+				if(insVal == true){
+					console.log("go");
+					ajaxInsertEvent();
+				}
+			});
 
-                var formData = new FormData();
-                formData.append("image", $files[0]);
+			function validEvent() {
+			  'use strict';
+			    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			    var forms = document.getElementsByClassName('needs-validation');
+			    // Loop over them and prevent submission
+			    var validation = Array.prototype.filter.call(forms, function(form) {
+			      form.addEventListener('click', function(event) {
+// 			        if (form.checkValidity() === false) {
+// 			          event.preventDefault();
+// 			          event.stopPropagation();
+// 			        }
+			        form.classList.add('was-validated');
+			      }, false);
+			    });
+			};
+			
+			function insertValidate(){
+				if($('#chain_no').val() == ''){
+					alert("체인명을 확인해주세요.")
+					return false;
+				}else if( $('#menu_name').val() == ''){
+					alert("메뉴명을 확인해주세요.")
+					return false;
+				}else if($('#single_price').val() == ''){
+					alert("단품가격을 확인해주세요.")
+					return false;
+				}else if($('#set_price').val() == ''){
+					alert("세트가격을 확인해주세요.")
+					return false;
+				}else if($('#calory').val() == ''){
+					alert("칼로리를 확인해주세요.")
+					return false;
+				}else if($('#display_yn').val() == ''){
+					alert("전시여부를 확인해주세요.")
+					return false;
+				}else if( $('#img_url').val() == ''){
+					alert("이미지 경로를 확인해주세요.")
+					return false;
+				}
+				return true;
+			}
+			
+			function ajaxInsertEvent(){
+		    	var formData = $("#tableForm").serialize();
+		        $.ajax({
+		            type: 'POST',
+		            url: '/insertBurger',
+		            data: formData,
+		            success: function(response){
+		            	alert("상품등록에 성공했습니다.");
+		            	console.log(response);
+		            	window.location.href = "/registPage";
+		            },
+		            error:function(){
+		            	alert("상품등록에 실패했습니다.");
+		            }
+		        })
+		        return false;
+			};
 
-                var settings = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": apiUrl,
-                    "method": "POST",
-                    "datatype": "json",
-                    "headers": {
-                        "Authorization": "Client-ID " + apiKey
-                    },
-                    "processData": false,
-                    "contentType": false,
-                    "data": formData,
-                    beforeSend: function (xhr) {
-                    	$('#save_button').attr('disabled', true); 
-                        console.log("Uploading");
-                    },
-                    success: function (res) {
-                        console.log(res.data.link);
-                    },
-                    error: function () {
-                        alert("Failed");
-                    }
-                }
-                $.ajax(settings).done(function (response) {
-                	console.log(response.data.link);
-                    console.log("Done");
-                	$('#img_url').val(response.data.link);
-                	$('#save_button').attr('disabled', false);
-                });
-            }
-        });
-    });
+			$('input[type=file]').on("change", function() {
+				var $files = $(this).get(0).files;
+				if ($files.length) {
+					// Reject big files
+					if ($files[0].size > $(this).data("max-size") * 1024) {
+						console.log("Please select a smaller file");
+						return false;
+					}
+					var apiUrl = 'https://api.imgur.com/3/image';
+					var apiKey = '488d9dd87112077';
 
-	
-</script>
+					var formData = new FormData();
+					formData.append("image", $files[0]);
+
+					var settings = {
+						"async" : true,
+						"crossDomain" : true,
+						"url" : apiUrl,
+						"method" : "POST",
+						"datatype" : "json",
+						"headers" : {
+							"Authorization" : "Client-ID " + apiKey
+						},
+						"processData" : false,
+						"contentType" : false,
+						"data" : formData,
+						beforeSend : function(xhr) {
+							$('#save_button').attr('disabled', true);
+							console.log("Uploading");
+						},
+						success : function(res) {
+							console.log(res.data.link);
+						},
+						error : function() {
+							alert("Failed");
+						}
+					}
+					$.ajax(settings).done(function(response) {
+						console.log(response.data.link);
+						console.log("Done");
+						$('#img_url').val(response.data.link);
+						$('#save_button').attr('disabled', false);
+					});
+				}
+			});
+		});
+		
+		
+	</script>
 
 </body>
 

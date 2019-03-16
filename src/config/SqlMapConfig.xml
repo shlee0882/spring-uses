@@ -13,6 +13,7 @@
 		<typeAlias alias="Burger" type="burger.vo.BurgerVO" />
 		<typeAlias alias="Division" type="burger.vo.DivisionVO" />
 		<typeAlias alias="Admin" type="burger.vo.AdminVO" />
+		<typeAlias alias="Auth" type="burger.vo.AuthInfo" />
 	</typeAliases>
 
 </configuration>
