@@ -42,7 +42,7 @@
 
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-	<a class="navbar-brand mr-1" href="/">Admin Page</a>
+	<a class="navbar-brand mr-1" href="#">Admin Page</a>
 
 	<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
 		id="sidebarToggle" href="#">
@@ -84,6 +84,9 @@
 			<li class="nav-item active"><a class="nav-link"
 				href="/registPage"> <i class="fas fa-fw fa-table"></i> <span>등록</span></a>
 			</li>
+			<li class="nav-item"><a class="nav-link" href="/">
+					<i class="fas fa-fw fa-table"></i> <span>사용자 화면</span>
+			</a></li>			
 		</ul>
 
 		<div id="content-wrapper">
@@ -119,12 +122,24 @@
 											<td><select class="selectpicker" name="chain_no" id="chain_no">
 													<option value="1">맥도날드</option>
 													<option value="2">롯데리아</option>
+													<option value="3">버거킹</option>
+													<option value="4">맘스터치</option>
 											</select></td>
 										</tr>
 										<tr>
 											<td><label for="menu_name">메뉴명</label></td>
 											<td><input type="text" class="form-control"
 												id="menu_name" name="menu_name" required></td>
+										</tr>
+										<tr>
+											<td><label for="category">카테고리</label></td>
+											<td>
+												<select class="selectpicker" name="category" id="category">
+													<option value="5">햄버거</option>
+													<option value="6">치킨</option>
+													<option value="7">사이드</option>
+												</select>
+											</td>
 										</tr>
 										<tr>
 											<td><label for="single_price">단품가격</label></td>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import burger.vo.AdminVO;
 import burger.vo.AuthInfo;
 import burger.vo.BurgerVO;
+import burger.vo.DisplayVO;
 import burger.vo.DivisionVO;
 
 @Repository("burgerDao")
@@ -82,6 +83,13 @@ public class BurgerDaoImpl implements BurgerDao {
 	public AuthInfo loginRequest(Map<String, Object> dataMap) {
 		AuthInfo getLoginRequest = session.selectOne("burgerNS.loginRequest", dataMap);
 		return getLoginRequest;
+	}
+
+	@Override
+	public List<DisplayVO> getDisplayList() {
+		// TODO Auto-generated method stub
+		List<DisplayVO>  displayList = session.selectList("burgerNS.getDisplayList");
+		return displayList;
 	}
 
 

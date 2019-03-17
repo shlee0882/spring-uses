@@ -18,6 +18,9 @@
 		<if test="brandList != '' ">
 		   AND a.chain_name = #{brandList}
 		</if>
+		<if test="menuSelect != '' ">
+		   AND b.category = #{menuSelect}
+		</if>
 		<if test="priceSelect != '' ">
 		   AND b.single_price BETWEEN #{priceSt} AND #{priceEnd}
 		</if>
@@ -40,6 +43,9 @@
 		<if test="brandList != '' ">
 		   AND a.chain_name = #{brandList}
 		</if>
+		<if test="menuSelect != '' ">
+		   AND b.category = #{menuSelect}
+		</if>		
 		<if test="priceSelect != '' ">
 		   AND b.single_price BETWEEN #{priceSt} AND #{priceEnd}
 		</if>
@@ -50,7 +56,8 @@
 	</select>
 
 	<select id="selectDivisionList" resultType="Division">
-	SELECT a.item
+	SELECT a.division_no
+			  , a.item
 			  , a.contents
 	  FROM division a
 	</select>
@@ -84,6 +91,8 @@
 		         , b.set_price
 		         , b.calory
 		         , b.img_url
+		         , b.display_yn
+                 , b.category
 		      FROM chain_store a
 	 INNER JOIN products b
 	        ON a.chain_no = b.chain_no
@@ -101,15 +110,29 @@
 	</update>
 
 	<insert id="insertBurger" parameterType="map">
-	INSERT INTO products(chain_no, menu_name, single_price, set_price, calory, display_yn, img_url)
+	INSERT INTO products(chain_no, menu_name, single_price, set_price, calory, display_yn, img_url, category)
 	VALUES(#{chain_no}
 			  , #{menu_name}
 			  , #{single_price}
 			  , #{set_price}
 			  , #{calory}
 			  , #{display_yn}
-			  , #{img_url})
+			  , #{img_url}
+			  , #{category})
 	</insert>
+	
+<!-- 	getDisplayList -->
+
+	<select id="getDisplayList" resultType="Display">
+	    SELECT a.display_no
+	 			  , a.display_type
+     			  , a.name
+     			  , a.img_url
+     			  , a.priority
+		   FROM display a
+  		 WHERE a.display_yn = 'Y'
+  		 ORDER BY a.priority asc
+	</select>
 
 </mapper>
  

@@ -27,13 +27,16 @@
 .table1 { display: table; } 
 .table1>* { display: table-row; }
 .table1>*>* { display: table-cell; }
+
+#dataTable > tbody > tr > td > span { display:none; }
+
 </style>
 </head>
 <body id="page-top">
 
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-	<a class="navbar-brand mr-1" href="/">Admin Page</a>
+	<a class="navbar-brand mr-1" href="#">Admin Page</a>
 
 	<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
 		id="sidebarToggle" href="#">
@@ -54,9 +57,6 @@
 		</a>
 			<div class="dropdown-menu dropdown-menu-right"
 				aria-labelledby="userDropdown">
-				<a class="dropdown-item" href="#">Settings</a> <a
-					class="dropdown-item" href="#">Activity Log</a>
-				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" href="#" data-toggle="modal"
 					data-target="#logoutModal">Logout</a>
 			</div></li>
@@ -69,11 +69,14 @@
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
 			<li class="nav-item active"><a class="nav-link"
-				href="adminPage.jsp"> <i class="fas fa-fw fa-tachometer-alt"></i>
+				href="/getBurgerList"> <i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>조회 / 변경</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/registPage">
 					<i class="fas fa-fw fa-table"></i> <span>등록</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link" href="/">
+					<i class="fas fa-fw fa-table"></i> <span>사용자 화면</span>
 			</a></li>
 		</ul>
 
@@ -103,47 +106,46 @@
 								cellspacing="0">
 								<thead>
 									<tr>
-										<th width="15%">체인번호</th>
-										<th width="15%">브랜드</th>
-										<th width="0%"style="display:none;">제품번호</th>
-										<th width="20%">메뉴명</th>
+										<th width="6%">번호</th>
+										<th width="5%">메뉴명</th>
 										<th width="10%">단품가격</th>
 										<th width="10%">세트가격</th>
 										<th width="5%">칼로리</th>
-										<th width="10%">이미지 경로</th>
-										<th width="15%">저장 버튼</th>
+										<th width="5%">전시</th>
+										<th width="5%">경로</th>
+										<th width="11%">첨부</th>
+										<th width="10%">저장</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="burger" items="${allBurgerList}" varStatus="status">
 										<tr>
-											<td><form id="form${status.count}" action="/updateBurger" method="post" name="frmSave"><input type="number" name="chain_no" value="${burger.chain_no}" style="width: 30px;"/></form></td>
-											<td>${burger.chain_name}</td>
-											<td style="display:none;">
+											<td><form id="form${status.count}" name="frmSave">
+												<input type="number" name="chain_no" value="${burger.chain_no}" style="width: 30px;"/></form></td>
 												<input form="form${status.count}" style="display:none;" type="hidden" name="product_no" value="${burger.product_no}" />
-											</td>
 											<td>
 												<input form="form${status.count}" type="text" name="menu_name" value="${burger.menu_name}" />
-												<span name="menuNm">${burger.menu_name}</span>
 											</td>
 											<td>
 												<input form="form${status.count}" type="number" name="single_price" value="${burger.single_price}"  style="width: 100px;"/>
-												<span name="singlePr">${burger.single_price}</span>
 											</td>
 											<td>
 												<input form="form${status.count}" type="number" name="set_price" value="${burger.set_price}" style="width: 100px;" />
-												<span name="setPr">${burger.set_price}</span>
 											</td>
 											<td>
 												<input form="form${status.count}"  type="number" name="calory" value="${burger.calory}" style="width: 100px;" />
-												<span name="cal">${burger.calory}</span>
 											</td>
 											<td>
-												<input form="form${status.count}" type="text" name="img_url" value="${burger.img_url}" style="width: 100%;"/>
-												<span name="imgUr">${burger.img_url}</span>
+												<input form="form${status.count}"  type="text" name="display_yn" value="${burger.display_yn}" style="width: 100px;" />
 											</td>
 											<td>
-												<button form="form${status.count}" type="submit" value="Submit">저장</button>
+												<input form="form${status.count}" type="text" name="img_url"  id="imgform${status.count}" value="${burger.img_url}" style="width: 100px;" />
+											</td>
+											<td>
+												<input form="form${status.count}" type="file" name="img_file" style="width: 100%;"/>
+											</td>
+											<td>
+												<button form="form${status.count}" type="button" id="saveform${status.count}">저장</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -185,18 +187,17 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<h5 class="modal-title" id="exampleModalLabel">로그아웃</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
+				<div class="modal-body">정말 로그아웃 하시겠습니까?</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+					<a class="btn btn-primary" href="/logOut">Logout</a>
 				</div>
 			</div>
 		</div>
@@ -222,27 +223,107 @@
 <!-- 	<script src="js/demo/chart-area-demo.js"></script> -->
 	<script type="text/javascript">
 	$(document).ready(function() {
-	    $('form[name="frmSave"]').submit(function() {
+// 	    $('form[name="frmSave"]').submit(function() {
+// 	        $.ajax({
+// 	            type: 'POST',
+// 	            url: $(this).attr('action'),
+// 	            data: $(this).serialize(),
+// 	            dataType: 'json',
+// 	            success: function(json) {
+// 	            	alert("변경에 성공했습니다.");
+// 	            },
+// 	            error:function(){
+// 	            	alert("변경에 실패했습니다.");
+// 	            }
+// 	        })
+// 	        return false;
+// 	    });
+	    var formData;
+	    
+	    
+		$('button[type=button]').click(function() {
+			var formId = $(this).attr('id');
+			formId  = formId.substring(4);
+			console.log(formId);
+			if(formData instanceof FormData){
+				uploadImgAPI(formId, formData);
+			}else{
+				ajaxUpdateEvent(formId);
+			}
+		});
+		
+		function ajaxUpdateEvent(formId){
+	    	var formData = $('#'+formId).serialize();
+	    	console.log(formData);
 	        $.ajax({
 	            type: 'POST',
-	            url: $(this).attr('action'),
-	            data: $(this).serialize(),
-	            dataType: 'json',
-	            success: function(json) {
-	            	alert("변경에 성공했습니다.");
+	            url: '/updateBurger',
+	            data: formData,
+	            success: function(response){
+	            	alert("상품변경에 성공했습니다.");
+	            	console.log(response);
+	            	window.location.href = "/getBurgerList";
 	            },
 	            error:function(){
-	            	alert("변경에 실패했습니다.");
+	            	alert("상품변경에 실패했습니다.");
 	            }
 	        })
 	        return false;
-	    });
+		};
 	    
-		$("span[name=menuNm]").hide();
-		$("span[name=singlePr]").hide();
-		$("span[name=setPr]").hide();
-		$("span[name=cal]").hide();
-		$("span[name=imgUr]").hide();
+	    
+		$('input[type=file]').on("change", function() {
+			var $files = $(this).get(0).files;
+			if ($files.length) {
+				// Reject big files
+				if ($files[0].size > $(this).data("max-size") * 1024) {
+					console.log("Please select a smaller file");
+					return false;
+				}
+
+				formData = new FormData();
+				formData.append("image", $files[0]);
+				
+			}
+		});
+
+		function uploadImgAPI(formId, formData){
+			
+			var apiUrl = 'https://api.imgur.com/3/image';
+			var apiKey = '488d9dd87112077';
+			
+			var settings = {
+					"async" : true,
+					"crossDomain" : true,
+					"url" : apiUrl,
+					"method" : "POST",
+					"datatype" : "json",
+					"headers" : {
+						"Authorization" : "Client-ID " + apiKey
+					},
+					"processData" : false,
+					"contentType" : false,
+					"data" : formData,
+					beforeSend : function(xhr) {
+						$('#save_button').attr('disabled', true);
+						console.log("Uploading");
+					},
+					success : function(res) {
+						console.log(res.data.link);
+						$('#img'+formId).val(res.data.link);
+						ajaxUpdateEvent(formId);
+					},
+					error : function() {
+						alert("Failed");
+					}
+				}
+				$.ajax(settings).done(function(response) {
+					console.log(response.data.link);
+					console.log("Done");
+				});
+			
+		}
+		
 	});
 	</script>
 </body>

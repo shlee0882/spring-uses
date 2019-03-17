@@ -45,7 +45,6 @@
 						<span class="focus-input100"></span>
 					</div>
 					
-					
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
 						<input class="input100" type="password" name="passVal" placeholder="Password" id="passVal">
 						<span class="focus-input100"></span>
@@ -53,7 +52,14 @@
 					
 					<div class="flex-sb-m w-full p-t-3 p-b-24">
 						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<c:choose>
+							    <c:when test="${adminVo.rememberId eq 'true' && !empty adminVo.id}">
+									<input class="input-checkbox100" id="ckb1" type="checkbox" name="rememberMe" checked>
+							    </c:when>
+							    <c:otherwise>
+									<input class="input-checkbox100" id="ckb1" type="checkbox" name="rememberMe">
+							    </c:otherwise>
+							</c:choose>
 							<label class="label-checkbox100" for="ckb1">
 								Remember me
 							</label>
@@ -70,6 +76,8 @@
 						</button>
 					</div>
 				</form>
+				
+				
 			</div>
 		</div>
 	</div>

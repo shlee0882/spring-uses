@@ -16,6 +16,7 @@ import burger.dao.BurgerDao;
 import burger.vo.AdminVO;
 import burger.vo.AuthInfo;
 import burger.vo.BurgerVO;
+import burger.vo.DisplayVO;
 import burger.vo.DivisionVO;
 
 @Service("burgerService")
@@ -74,7 +75,28 @@ public class BurgerServiceImpl implements BurgerService{
 
 	@Override
 	public BurgerVO getBurgerTotalCount(Map<String, Object> dataMap) {
-		// TODO Auto-generated method stub
+		
+		String prStartVal ="";
+		String prEndVal ="";
+		String calStartVal ="";
+		String calEndVal ="";
+		
+		if(!"".equals(dataMap.get("priceSelect")) && dataMap.get("priceSelect") != null) {
+			String priceDivide = (String) dataMap.get("priceSelect");
+			prStartVal = priceDivide.substring(0, priceDivide.indexOf("~"));
+			prEndVal= priceDivide.substring(priceDivide.indexOf("~")+1);
+		}
+
+		if(!"".equals(dataMap.get("calorySelect")) && dataMap.get("calorySelect") != null) {
+			String caloryDivide = (String) dataMap.get("calorySelect");
+			calStartVal = caloryDivide.substring(0, caloryDivide.indexOf("~"));
+			calEndVal= caloryDivide.substring(caloryDivide.indexOf("~")+1);
+		}
+		
+		dataMap.put("priceSt", prStartVal);
+		dataMap.put("priceEnd", prEndVal);
+		dataMap.put("calSt", calStartVal);
+		dataMap.put("calEnd", calEndVal);
 		return burgerdao.getBurgerTotalCount(dataMap);
 	}
 
@@ -106,6 +128,12 @@ public class BurgerServiceImpl implements BurgerService{
 	public AuthInfo loginRequest(Map<String, Object> dataMap) {
 		// TODO Auto-generated method stub
 		return burgerdao.loginRequest(dataMap);
+	}
+
+	@Override
+	public List<DisplayVO> getDisplayList() {
+		// TODO Auto-generated method stub
+		return burgerdao.getDisplayList();
 	}
 
 

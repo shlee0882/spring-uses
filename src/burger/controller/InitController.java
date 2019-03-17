@@ -31,6 +31,7 @@ import burger.service.BurgerService;
 import burger.vo.AdminVO;
 import burger.vo.AuthInfo;
 import burger.vo.BurgerVO;
+import burger.vo.DisplayVO;
 import burger.vo.DivisionVO;
 
 @Controller
@@ -42,10 +43,13 @@ public class InitController {
 	private static final Logger logger = LoggerFactory.getLogger(InitController.class);
 
 	@RequestMapping("/")
-	public String getDivision(Model model) {
-
+	public String getDivision(AdminVO adminVo, @CookieValue(value = "REMEMBER", required = false) Cookie rememberCookie,
+			HttpSession session, HttpServletResponse response, Model model) {
+		AuthInfo authInfo = new AuthInfo();
+		
+		List<DisplayVO> displayList = burgerService.getDisplayList();
 		List<DivisionVO> divisionList = burgerService.getDivisionList();
-		System.out.println(divisionList);
+		
 		List<DivisionVO> brandList = new ArrayList<>();
 		List<DivisionVO> menuList = new ArrayList<>();
 		List<DivisionVO> priceList = new ArrayList<>();
@@ -61,17 +65,32 @@ public class InitController {
 				caloryList.add(divisionVO);
 			}
 		}
+		if (rememberCookie != null) {
+			adminVo.setId(rememberCookie.getValue());
+			adminVo.setRememberId(true);
+		} else {
+		}
+		if (session.getAttribute("authInfo") != null) {
+			authInfo = (AuthInfo) session.getAttribute("authInfo");
+		}
+		model.addAttribute("adminVo", authInfo);
+		// model.addAttribute("adminVo", adminVo);
 		model.addAttribute("brandList", brandList);
 		model.addAttribute("menuList", menuList);
 		model.addAttribute("priceList", priceList);
 		model.addAttribute("caloryList", caloryList);
+		model.addAttribute("displayList", displayList);
 		return "index";
 	}
 
-	// @RequestMapping("login")
-	// public String getLoginForm(Model model) {
-	// return "loginForm.jsp";
-	// }
+	@RequestMapping("logOut")
+	public String logOut(AdminVO adminVo, @CookieValue(value = "REMEMBER", required = false) Cookie rememberCookie,
+			HttpSession session, HttpServletResponse response, Model model) {
+		if (session != null) {
+			session.invalidate();
+		}
+		return "redirect:/";
+	}
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView loginForm(AdminVO adminVo,
@@ -81,33 +100,37 @@ public class InitController {
 		if (rememberCookie != null) {
 			adminVo.setId(rememberCookie.getValue());
 			adminVo.setRememberId(true);
-		}else {
-			mv = new ModelAndView("loginForm","adminVo",adminVo);
+		} else {
 		}
+		mv = new ModelAndView("loginForm", "adminVo", adminVo);
 
 		return mv;
 	}
 
 	@RequestMapping(value = "loginRequest", method = RequestMethod.POST)
-	public ModelAndView loginSuccess(@RequestParam Map<String, Object> dataMap, HttpSession session, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView loginSuccess(@RequestParam Map<String, Object> dataMap, HttpSession session,
+			HttpServletResponse response) throws Exception {
 
 		try {
 			AuthInfo authInfo = burgerService.loginRequest(dataMap);
 			System.out.println(authInfo);
 			session.setAttribute("authInfo", authInfo);
 			String id = (String) authInfo.getId();
-			Cookie rememberCookie = new Cookie("REMEMBER", id );
+			Cookie rememberCookie = new Cookie("REMEMBER", id);
 			rememberCookie.setPath("/");
 			// ºê¶ó¿ìÀú ²ô¸é ÄíÅ° »ç¶óÁü
-			rememberCookie.setMaxAge(-1);
+			if ("on".equals(dataMap.get("rememberMe")) && dataMap.get("rememberMe") != null) {
+				rememberCookie.setMaxAge(24*60*60);
+			} else {
+				rememberCookie.setMaxAge(0);
+			}
 			response.addCookie(rememberCookie);
 
 		} catch (Exception e) {
 			ModelAndView mv = new ModelAndView("loginForm");
 			return mv;
 		}
-		ModelAndView mv = new ModelAndView("adminPage");
+		ModelAndView mv = new ModelAndView("redirect:/getBurgerList");
 		return mv;
 	}
 
@@ -129,10 +152,15 @@ public class InitController {
 	// }
 
 	@RequestMapping("getBurgerList")
-	public String getUserList(Model model) {
-		List<BurgerVO> allBurgerList = burgerService.getAllBurgerList();
-		model.addAttribute("allBurgerList", allBurgerList);
-		return "adminPage";
+	public String getUserList(HttpSession session, HttpServletResponse response, Model model) {
+		
+		if (session.getAttribute("authInfo") != null) {
+			List<BurgerVO> allBurgerList = burgerService.getAllBurgerList();
+			model.addAttribute("allBurgerList", allBurgerList);
+			return "adminPage";
+		}else {
+			return "redirect:/login";
+		}
 	}
 
 	@RequestMapping(value = "updateBurger", method = RequestMethod.POST)
