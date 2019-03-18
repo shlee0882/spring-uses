@@ -68,13 +68,13 @@
 
 		<!-- Sidebar -->
 		<ul class="sidebar navbar-nav">
-			<li class="nav-item active"><a class="nav-link" href="/getBurgerList">
+			<li class="nav-item"><a class="nav-link" href="/getBurgerList">
 					<i class="fas fa-fw fa-tachometer-alt"></i> <span>상품 조회 / 변경</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/registPage"> <i class="fas fa-fw fa-table"></i> <span>상품 등록</span></a>
 			</li>
-			<li class="nav-item"><a class="nav-link" href="/getDisplayList">
+			<li class="nav-item active"><a class="nav-link" href="/getDisplayList">
 					<i class="fas fa-fw fa-table"></i> <span>전시 조회 / 변경</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/registDisplayPage">

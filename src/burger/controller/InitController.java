@@ -138,6 +138,17 @@ public class InitController {
 	public String getRegistPage(Model model) {
 		return "registPage";
 	}
+	
+	@RequestMapping("registDisplayPage")
+	public String registDisplayPage(Model model) {
+		return "registDisplayPage";
+	}
+
+	@RequestMapping("getDisplayList")
+	public String getDisplayList(Model model) {
+		return "adminDisplayList";
+	}
+	
 
 	// @RequestMapping(value="loginRequest", method=RequestMethod.POST)
 	// public String getLoginRequest(@RequestParam Map<String, Object> dataMap,

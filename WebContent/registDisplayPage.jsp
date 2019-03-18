@@ -81,13 +81,13 @@
 			<li class="nav-item"><a class="nav-link" href="/getBurgerList">
 					<i class="fas fa-fw fa-tachometer-alt"></i> <span>상품 조회 / 변경</span>
 			</a></li>
-			<li class="nav-item active"><a class="nav-link"
+			<li class="nav-item"><a class="nav-link"
 				href="/registPage"> <i class="fas fa-fw fa-table"></i> <span>상품 등록</span></a>
 			</li>
 			<li class="nav-item"><a class="nav-link" href="/getDisplayList">
 					<i class="fas fa-fw fa-table"></i> <span>전시 조회 / 변경</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="/registDisplayPage">
+			<li class="nav-item active"><a class="nav-link" href="/registDisplayPage">
 					<i class="fas fa-fw fa-table"></i> <span>전시 등록</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/">
@@ -260,124 +260,7 @@
 	<script type="text/javascript">
 		$("document").ready(function() {
 			
-			$('#save_button').click(function() {
-				validEvent();
-				var insVal = false;
-				insVal = insertValidate();
-				console.log(insVal);
-				if(insVal == true){
-					console.log("go");
-					ajaxInsertEvent();
-				}
-			});
-
-			function validEvent() {
-			  'use strict';
-			    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-			    var forms = document.getElementsByClassName('needs-validation');
-			    // Loop over them and prevent submission
-			    var validation = Array.prototype.filter.call(forms, function(form) {
-			      form.addEventListener('click', function(event) {
-// 			        if (form.checkValidity() === false) {
-// 			          event.preventDefault();
-// 			          event.stopPropagation();
-// 			        }
-			        form.classList.add('was-validated');
-			      }, false);
-			    });
-			};
-			
-			function insertValidate(){
-				if($('#chain_no').val() == ''){
-					alert("체인명을 확인해주세요.")
-					return false;
-				}else if( $('#menu_name').val() == ''){
-					alert("메뉴명을 확인해주세요.")
-					return false;
-				}else if($('#single_price').val() == ''){
-					alert("단품가격을 확인해주세요.")
-					return false;
-				}else if($('#set_price').val() == ''){
-					alert("세트가격을 확인해주세요.")
-					return false;
-				}else if($('#calory').val() == ''){
-					alert("칼로리를 확인해주세요.")
-					return false;
-				}else if($('#display_yn').val() == ''){
-					alert("전시여부를 확인해주세요.")
-					return false;
-				}else if( $('#img_url').val() == ''){
-					alert("이미지 경로를 확인해주세요.")
-					return false;
-				}
-				return true;
-			}
-			
-			function ajaxInsertEvent(){
-		    	var formData = $("#tableForm").serialize();
-		        $.ajax({
-		            type: 'POST',
-		            url: '/insertBurger',
-		            data: formData,
-		            success: function(response){
-		            	alert("상품등록에 성공했습니다.");
-		            	console.log(response);
-		            	window.location.href = "/registPage";
-		            },
-		            error:function(){
-		            	alert("상품등록에 실패했습니다.");
-		            }
-		        })
-		        return false;
-			};
-
-			$('input[type=file]').on("change", function() {
-				var $files = $(this).get(0).files;
-				if ($files.length) {
-					// Reject big files
-					if ($files[0].size > $(this).data("max-size") * 1024) {
-						console.log("Please select a smaller file");
-						return false;
-					}
-					var apiUrl = 'https://api.imgur.com/3/image';
-					var apiKey = '488d9dd87112077';
-
-					var formData = new FormData();
-					formData.append("image", $files[0]);
-
-					var settings = {
-						"async" : true,
-						"crossDomain" : true,
-						"url" : apiUrl,
-						"method" : "POST",
-						"datatype" : "json",
-						"headers" : {
-							"Authorization" : "Client-ID " + apiKey
-						},
-						"processData" : false,
-						"contentType" : false,
-						"data" : formData,
-						beforeSend : function(xhr) {
-							$('#save_button').attr('disabled', true);
-							console.log("Uploading");
-						},
-						success : function(res) {
-							console.log(res.data.link);
-						},
-						error : function() {
-							alert("Failed");
-						}
-					}
-					$.ajax(settings).done(function(response) {
-						console.log(response.data.link);
-						console.log("Done");
-						$('#img_url').val(response.data.link);
-						$('#save_button').attr('disabled', false);
-					});
-				}
-			});
 		});
-		
 		
 	</script>
 
