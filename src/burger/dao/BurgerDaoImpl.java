@@ -92,6 +92,29 @@ public class BurgerDaoImpl implements BurgerDao {
 		return displayList;
 	}
 
+	@Override
+	public List<DisplayVO> getAllDisplayList() {
+		List<DisplayVO>  allDisplayList = session.selectList("burgerNS.getAllDisplayList");
+		return allDisplayList;
+	}
+
+	@Override
+	public DisplayVO updateDisplay(Map<String, Object> dataMap) {
+		DisplayVO displayVO = new DisplayVO();
+		int result = session.update("burgerNS.updateDisplay",dataMap);
+		System.out.println("결과값 : "+result);
+		return displayVO;
+	}
+
+	@Override
+	public DisplayVO insertDisplay(Map<String, Object> dataMap) {
+		DisplayVO displayVO = new DisplayVO();
+		int result = session.insert("burgerNS.insertDisplay", dataMap);
+		System.out.println("결과값 : "+result);
+		return displayVO;
+	}
+
+
 
 
 

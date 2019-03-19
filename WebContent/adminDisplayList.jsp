@@ -111,44 +111,39 @@
 								cellspacing="0">
 								<thead>
 									<tr>
-										<th width="6%">번호</th>
-										<th width="5%">메뉴명</th>
-										<th width="10%">단품가격</th>
-										<th width="10%">세트가격</th>
-										<th width="5%">칼로리</th>
-										<th width="5%">전시</th>
-										<th width="5%">경로</th>
-										<th width="11%">첨부</th>
+										<th width="10%">전시유형</th>
+										<th width="10%">이름</th>
+										<th width="10%">전시여부</th>
+										<th width="10%">우선순위</th>
+										<th width="10%">경로</th>
+										<th width="10%">첨부</th>
 										<th width="10%">저장</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="burger" items="${allBurgerList}" varStatus="status">
+									<c:forEach var="display" items="${allDisplayList}" varStatus="status">
 										<tr>
-											<td><form id="form${status.count}" name="frmSave">
-												<input type="number" name="chain_no" value="${burger.chain_no}" style="width: 30px;"/></form></td>
-												<input form="form${status.count}" style="display:none;" type="hidden" name="product_no" value="${burger.product_no}" />
 											<td>
-												<input form="form${status.count}" type="text" name="menu_name" value="${burger.menu_name}" />
+												<form id="form${status.count}" name="frmSave">
+													<input type="text" name="display_type" value="${display.display_type}"/>
+												</form>												
+											</td>
+												<input form="form${status.count}" style="display:none;" type="hidden" name="display_no" value="${display.display_no}" />
+											<td>
+												<input form="form${status.count}" type="text" name="name" value="${display.name}" />
 											</td>
 											<td>
-												<input form="form${status.count}" type="number" name="single_price" value="${burger.single_price}"  style="width: 100px;"/>
+												<input form="form${status.count}" type="text" name="display_yn" value="${display.display_yn}" style="width: 100px;" />
 											</td>
 											<td>
-												<input form="form${status.count}" type="number" name="set_price" value="${burger.set_price}" style="width: 100px;" />
-											</td>
+												<input form="form${status.count}"  type="text" name="priority" value="${display.priority}" style="width: 100px;" />
+											</td>											
 											<td>
-												<input form="form${status.count}"  type="number" name="calory" value="${burger.calory}" style="width: 100px;" />
-											</td>
-											<td>
-												<input form="form${status.count}"  type="text" name="display_yn" value="${burger.display_yn}" style="width: 100px;" />
-											</td>
-											<td>
-												<input form="form${status.count}" type="text" name="img_url"  id="imgform${status.count}" value="${burger.img_url}" style="width: 100px;" />
+												<input form="form${status.count}" type="text" name="img_url" id="imgform${status.count}" value="${display.img_url}"  style="width: 100px;"/>
 											</td>
 											<td>
 												<input form="form${status.count}" type="file" name="img_file" style="width: 100%;"/>
-											</td>
+											</td>					
 											<td>
 												<button form="form${status.count}" type="button" id="saveform${status.count}">저장</button>
 											</td>
@@ -245,15 +240,15 @@
 	    	console.log(formData);
 	        $.ajax({
 	            type: 'POST',
-	            url: '/updateBurger',
+	            url: '/updateDisplay',
 	            data: formData,
 	            success: function(response){
-	            	alert("상품변경에 성공했습니다.");
+	            	alert("전시변경에 성공했습니다.");
 	            	console.log(response);
-	            	window.location.href = "/getBurgerList";
+	            	window.location.href = "/getDisplayList";
 	            },
 	            error:function(){
-	            	alert("상품변경에 실패했습니다.");
+	            	alert("전시변경에 실패했습니다.");
 	            }
 	        })
 	        return false;

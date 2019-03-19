@@ -107,7 +107,7 @@
 				<!-- DataTables Example -->
 				<div class="card mb-3">
 					<div class="card-header">
-						<i class="fas fa-table"></i> 상품 등록
+						<i class="fas fa-table"></i> 전시 등록
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -124,50 +124,30 @@
 									</thead>
 									<tbody class="td_vertical">
 										<tr>
-											<td><label for="chain_no">체인번호</label></td>
-											<td><select class="selectpicker" name="chain_no" id="chain_no">
-													<option value="1">맥도날드</option>
-													<option value="2">롯데리아</option>
-													<option value="3">버거킹</option>
-													<option value="4">맘스터치</option>
+											<td><label for="display_type">전시유형</label></td>
+											<td><select class="selectpicker" name="display_type" id="display_type">
+													<option value="banner">banner</option>
+													<option value="main">main</option>
 											</select></td>
 										</tr>
 										<tr>
-											<td><label for="menu_name">메뉴명</label></td>
+											<td><label for="name">이름</label></td>
 											<td><input type="text" class="form-control"
-												id="menu_name" name="menu_name" required></td>
+												id="name" name="name" required></td>
 										</tr>
 										<tr>
-											<td><label for="category">카테고리</label></td>
+											<td><label for="display_yn">전시유무</label></td>
 											<td>
-												<select class="selectpicker" name="category" id="category">
-													<option value="5">햄버거</option>
-													<option value="6">치킨</option>
-													<option value="7">사이드</option>
+												<select class="selectpicker" name="display_yn" id="display_yn">
+													<option value="Y">Y</option>
+													<option value="N">N</option>
 												</select>
 											</td>
 										</tr>
 										<tr>
-											<td><label for="single_price">단품가격</label></td>
+											<td><label for="priority">전시우선순위</label></td>
 											<td><input type="number" class="form-control"
-												id="single_price" name="single_price" required></td>
-										</tr>
-										<tr>
-											<td><label for="set_price">세트가격</label></td>
-											<td><input type="number" class="form-control"
-												id="set_price" name="set_price" required></td>
-										</tr>
-										<tr>
-											<td><label for="calory">칼로리</label></td>
-											<td><input type="number" class="form-control"
-												id="calory" name="calory" required></td>
-										</tr>
-										<tr>
-											<td>전시여부</td>
-											<td><select class="selectpicker" name="display_yn" id='display_yn'>
-													<option value="Y">Y</option>
-													<option value="N">N</option>
-											</select></td>
+												id="priority" name="priority" required></td>
 										</tr>
 										<tr>
 											<td>이미지 첨부</td>
@@ -184,7 +164,7 @@
 										<tr>
 											<td colspan="2"><button type="button"
 													class="btn btn-secondary" id="save_button"
-													style="float: right;">새 상품 등록</button></td>
+													style="float: right;">새 전시 등록</button></td>
 										</tr>
 									</tbody>
 								</table>
@@ -260,7 +240,118 @@
 	<script type="text/javascript">
 		$("document").ready(function() {
 			
+			$('#save_button').click(function() {
+				validEvent();
+				var insVal = false;
+				insVal = insertValidate();
+				console.log(insVal);
+				if(insVal == true){
+					console.log("go");
+					ajaxInsertEvent();
+				}
+			});
+
+			function validEvent() {
+			  'use strict';
+			    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			    var forms = document.getElementsByClassName('needs-validation');
+			    // Loop over them and prevent submission
+			    var validation = Array.prototype.filter.call(forms, function(form) {
+			      form.addEventListener('click', function(event) {
+// 			        if (form.checkValidity() === false) {
+// 			          event.preventDefault();
+// 			          event.stopPropagation();
+// 			        }
+			        form.classList.add('was-validated');
+			      }, false);
+			    });
+			};
+			
+			function insertValidate(){
+				if($('#display_type').val() == ''){
+					alert("전시유형을 확인해주세요.")
+					return false;
+				}else if($('#name').val() == ''){
+					alert("이름을 확인해주세요.")
+					return false;
+				}else if($('#priority').val() == ''){
+					alert("전시우선순위를 확인해주세요.")
+					return false;
+				}else if($('#display_yn').val() == ''){
+					alert("전시여부를 확인해주세요.")
+					return false;
+				}else if( $('#img_url').val() == ''){
+					alert("이미지 경로를 확인해주세요.")
+					return false;
+				}
+				return true;
+			}
+			
+			function ajaxInsertEvent(){
+		    	var formData = $("#tableForm").serialize();
+		        $.ajax({
+		            type: 'POST',
+		            url: '/insertDisplay',
+		            data: formData,
+		            success: function(response){
+		            	alert("전시등록에 성공했습니다.");
+		            	console.log(response);
+		            	window.location.href = "/registDisplayPage";
+		            },
+		            error:function(){
+		            	alert("전시등록에 실패했습니다.");
+		            }
+		        })
+		        return false;
+			};
+
+			$('input[type=file]').on("change", function() {
+				var $files = $(this).get(0).files;
+				if ($files.length) {
+					// Reject big files
+					if ($files[0].size > $(this).data("max-size") * 1024) {
+						console.log("Please select a smaller file");
+						return false;
+					}
+					var apiUrl = 'https://api.imgur.com/3/image';
+					var apiKey = '488d9dd87112077';
+
+					var formData = new FormData();
+					formData.append("image", $files[0]);
+
+					var settings = {
+						"async" : true,
+						"crossDomain" : true,
+						"url" : apiUrl,
+						"method" : "POST",
+						"datatype" : "json",
+						"headers" : {
+							"Authorization" : "Client-ID " + apiKey
+						},
+						"processData" : false,
+						"contentType" : false,
+						"data" : formData,
+						beforeSend : function(xhr) {
+							$('#save_button').attr('disabled', true);
+							console.log("Uploading");
+						},
+						success : function(res) {
+							console.log(res.data.link);
+						},
+						error : function() {
+							alert("Failed");
+						}
+					}
+					$.ajax(settings).done(function(response) {
+						console.log(response.data.link);
+						console.log("Done");
+						$('#img_url').val(response.data.link);
+						$('#save_button').attr('disabled', false);
+					});
+				}
+			});
 		});
+		
 		
 	</script>
 

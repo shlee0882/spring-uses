@@ -33,5 +33,11 @@ public interface BurgerService {
 
 	public List<DisplayVO> getDisplayList();
 
+	public List<DisplayVO> getAllDisplayList();
+
+	public DisplayVO updateDisplay(Map<String, Object> dataMap);
+
+	public DisplayVO insertDisplay(Map<String, Object> dataMap);
+
 
 }

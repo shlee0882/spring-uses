@@ -134,6 +134,35 @@
   		 ORDER BY a.priority asc
 	</select>
 
+	<select id="getAllDisplayList" resultType="Display">
+	    SELECT a.display_no
+	 			  , a.display_type
+     			  , a.name
+     			  , a.display_yn
+     			  , a.img_url
+     			  , a.priority
+		   FROM display a
+	</select>
+
+	<update id="updateDisplay" parameterType="map" >
+	UPDATE display
+	      SET display_type = #{display_type}
+		      , name = #{name}
+		      , display_yn = #{display_yn}
+		      , priority = #{priority}
+		      , img_url = #{img_url}
+	WHERE display_no = #{display_no}
+	</update>
+
+	<insert id="insertDisplay" parameterType="map">
+	INSERT INTO display(display_type, name, img_url, display_yn, priority)
+	VALUES(#{display_type}
+			  , #{name}
+			  , #{img_url}
+			  , #{display_yn}
+			  , #{priority})
+	</insert>
+
 </mapper>
  
  

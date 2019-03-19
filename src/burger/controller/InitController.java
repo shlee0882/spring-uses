@@ -145,22 +145,19 @@ public class InitController {
 	}
 
 	@RequestMapping("getDisplayList")
-	public String getDisplayList(Model model) {
-		return "adminDisplayList";
+	public String getDisplayList(HttpSession session, HttpServletResponse response, Model model) {
+		
+		if (session.getAttribute("authInfo") != null) {
+			List<DisplayVO> allDisplayList = burgerService.getAllDisplayList();
+			model.addAttribute("allDisplayList", allDisplayList);
+			return "adminDisplayList";
+		}else {
+			return "redirect:/login";
+		}
+		
 	}
 	
 
-	// @RequestMapping(value="loginRequest", method=RequestMethod.POST)
-	// public String getLoginRequest(@RequestParam Map<String, Object> dataMap,
-	// Model model) throws Exception {
-	// AdminVO result = burgerService.getLoginRequest(dataMap);
-	//
-	// List<BurgerVO> allBurgerList = burgerService.getAllBurgerList();
-	// model.addAttribute("allBurgerList", allBurgerList);
-	// model.addAttribute("result", result);
-	//
-	// return "adminPage.jsp";
-	// }
 
 	@RequestMapping("getBurgerList")
 	public String getUserList(HttpSession session, HttpServletResponse response, Model model) {
@@ -182,11 +179,26 @@ public class InitController {
 		return result;
 	}
 
+	@RequestMapping(value = "updateDisplay", method = RequestMethod.POST)
+	@ResponseBody
+	public DisplayVO updateDisplay(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
+		DisplayVO result = burgerService.updateDisplay(dataMap);
+		model.addAttribute("result", result);
+		return result;
+	}
+
 	@RequestMapping(value = "insertBurger", method = RequestMethod.POST)
 	public String insertBurger(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
 		BurgerVO result = burgerService.insertBurger(dataMap);
 		model.addAttribute("result", result);
 		return "adminPage";
+	}
+
+	@RequestMapping(value = "insertDisplay", method = RequestMethod.POST)
+	public String insertDisplay(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
+		DisplayVO result = burgerService.insertDisplay(dataMap);
+		model.addAttribute("result", result);
+		return "registDisplayPage";
 	}
 
 }

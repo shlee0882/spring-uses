@@ -136,6 +136,24 @@ public class BurgerServiceImpl implements BurgerService{
 		return burgerdao.getDisplayList();
 	}
 
+	@Override
+	public List<DisplayVO> getAllDisplayList() {
+		// TODO Auto-generated method stub
+		return burgerdao.getAllDisplayList();
+	}
+
+	@Override
+	public DisplayVO updateDisplay(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return burgerdao.updateDisplay(dataMap);
+	}
+
+	@Override
+	public DisplayVO insertDisplay(Map<String, Object> dataMap) {
+		// TODO Auto-generated method stub
+		return burgerdao.insertDisplay(dataMap);
+	}
+
 
 
 
