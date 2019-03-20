@@ -102,11 +102,11 @@ public class InitController {
 			adminVo.setRememberId(true);
 		} else {
 		}
-		mv = new ModelAndView("loginForm", "adminVo", adminVo);
+		mv = new ModelAndView("view/admin/loginForm", "adminVo", adminVo);
 
 		return mv;
 	}
-
+	
 	@RequestMapping(value = "loginRequest", method = RequestMethod.POST)
 	public ModelAndView loginSuccess(@RequestParam Map<String, Object> dataMap, HttpSession session,
 			HttpServletResponse response) throws Exception {
@@ -127,7 +127,7 @@ public class InitController {
 			response.addCookie(rememberCookie);
 
 		} catch (Exception e) {
-			ModelAndView mv = new ModelAndView("loginForm");
+			ModelAndView mv = new ModelAndView("view/admin/loginForm");
 			return mv;
 		}
 		ModelAndView mv = new ModelAndView("redirect:/getBurgerList");
@@ -136,12 +136,12 @@ public class InitController {
 
 	@RequestMapping("registPage")
 	public String getRegistPage(Model model) {
-		return "registPage";
+		return "view/admin/registPage";
 	}
 	
 	@RequestMapping("registDisplayPage")
 	public String registDisplayPage(Model model) {
-		return "registDisplayPage";
+		return "view/admin/registDisplayPage";
 	}
 
 	@RequestMapping("getDisplayList")
@@ -150,7 +150,7 @@ public class InitController {
 		if (session.getAttribute("authInfo") != null) {
 			List<DisplayVO> allDisplayList = burgerService.getAllDisplayList();
 			model.addAttribute("allDisplayList", allDisplayList);
-			return "adminDisplayList";
+			return "view/admin/adminDisplayList";
 		}else {
 			return "redirect:/login";
 		}
@@ -165,7 +165,7 @@ public class InitController {
 		if (session.getAttribute("authInfo") != null) {
 			List<BurgerVO> allBurgerList = burgerService.getAllBurgerList();
 			model.addAttribute("allBurgerList", allBurgerList);
-			return "adminPage";
+			return "view/admin/adminPage";
 		}else {
 			return "redirect:/login";
 		}
@@ -191,7 +191,7 @@ public class InitController {
 	public String insertBurger(@RequestParam Map<String, Object> dataMap, Model model) throws Exception {
 		BurgerVO result = burgerService.insertBurger(dataMap);
 		model.addAttribute("result", result);
-		return "adminPage";
+		return "view/admin/adminPage";
 	}
 
 	@RequestMapping(value = "insertDisplay", method = RequestMethod.POST)

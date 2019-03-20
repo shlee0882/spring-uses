@@ -70,12 +70,12 @@
 <!-- 							</a> -->
 <!-- 						</div> -->
 					</div>
+				</form>
 					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn" id="loginButton" type="submit" value="Submit">
 							Login
 						</button>
 					</div>
-				</form>
 				
 				
 			</div>
@@ -101,41 +101,35 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-	<script>
-// 	function redirectFunc(){
-// 		 $( "#loginForm" ).submit();
-// 	}
+	<script type="text/javascript">
+	function redirectFunc(){
+	 	$( "#loginForm" ).submit();
+	}
+
+	$("#loginButton").click(function() {
+		var idVal = $("#idVal").val();
+		var passVal = $("#passVal").val();
+		var sendData = {};
+		sendData.idVal = idVal;
+		sendData.passVal = passVal; 
+		var requestData = sendData;
+		console.log(requestData);
 	
-// 	$("#loginButton").click(function() {
-// 		var idVal = $("#idVal").val();
-// 		var passVal = $("#passVal").val();
-// 		var sendData = {};
-// 		sendData.idVal = idVal;
-// 		sendData.passVal = passVal; 
-// 		var requestData = sendData;
-// 		console.log(requestData);
-	
-// 		$.ajax({
-// 			url : "/loginRequest",
-// 			type: "post",
-// 			dataType : "json",
-// 			data: JSON.stringify(requestData),
-// 			contentType:'application/json; charset=utf-8',
-// 			success : function(resData){
-// 				alert("로그인에 성공했습니다.")
-// 				console.log(resData);
-// 				redirectFunc();
-// 			},
-// 		    error: function (request, status, error) {
-// 		    	console.log(request);
-// 		    	console.log(status);
-// 		    	console.log(error);
-// 		    	alert("아이디와 비밀번호를 다시 확인해주세요.");	
-// 		    }
-// 		});
+		$.ajax({
+			url : "/burgers/loginRequest",
+			type: "post",
+			dataType : "json",
+			data: JSON.stringify(requestData),
+			contentType:'application/json; charset=utf-8',
+			success : function(resData){
+				redirectFunc();
+			},
+		    error: function (request, status, error) {
+		    	alert("아이디와 비밀번호를 다시 확인해주세요.");	
+		    }
+		});
 		
-// 	});
-	
+	});
 	</script>
 </body>
 </html>
