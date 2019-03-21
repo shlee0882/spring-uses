@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,14 @@ public class BurgerController {
 	@Autowired
 	BurgerService burgerService;
 	
-	@RequestMapping(method=RequestMethod.POST)
+	// 전체 조회
+	@RequestMapping(method=RequestMethod.GET)
+	public List<BurgerVO> getUserList() {
+		List<BurgerVO> burgerList = burgerService.getAllBurgerList();
+	    return burgerList;
+	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.POST)
 	@ResponseBody
 	public List<BurgerVO> getBurgerList(@RequestBody Map<String, Object> dataMap) {
 		List<BurgerVO> burgerList = burgerService.getBurgerList(dataMap);
@@ -43,5 +51,6 @@ public class BurgerController {
 		AdminVO result = burgerService.getLoginRequest(dataMap);
 		return result;
 	}
+	
 	
 }

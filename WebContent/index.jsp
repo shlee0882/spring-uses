@@ -183,9 +183,9 @@
 				</c:forEach>
 			</ol>
 			<div class="carousel-inner">
-			<c:forEach var="display" items="${displayList}">
+			<c:forEach var="display" items="${displayList}" varStatus="status">
 				<c:choose>
-					<c:when test="${display.priority eq '1'}">
+					<c:when test="${status.index eq '0'}">
 						<div class="carousel-item active">
 							<img src="${display.img_url}" class="d-block w-100"
 								alt="...">
@@ -317,7 +317,7 @@
 	function selectBurgerList(sendData){
 		
 		$.ajax({
-	        url : "/burgers",
+	        url : "/burgers/list",
 	        type: "post",
 	        dataType : "json",
 	        data: JSON.stringify(sendData),
