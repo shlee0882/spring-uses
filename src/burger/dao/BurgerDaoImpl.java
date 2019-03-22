@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import burger.vo.AdminVO;
 import burger.vo.AuthInfo;
+import burger.vo.BurgerJsonVO;
 import burger.vo.BurgerVO;
 import burger.vo.DisplayVO;
 import burger.vo.DivisionVO;
@@ -112,6 +113,12 @@ public class BurgerDaoImpl implements BurgerDao {
 		int result = session.insert("burgerNS.insertDisplay", dataMap);
 		System.out.println("°á°ú°ª : "+result);
 		return displayVO;
+	}
+
+	@Override
+	public List<BurgerJsonVO> getJsonAllBurgerList() {
+		List<BurgerJsonVO> allBurgerList = session.selectList("burgerNS.selectJsonAllBurgerList");
+		return allBurgerList;
 	}
 
 

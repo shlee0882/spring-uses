@@ -97,6 +97,22 @@
 	 INNER JOIN products b
 	        ON a.chain_no = b.chain_no
 	</select>
+	
+	<select id="selectJsonAllBurgerList" resultType="BurgerJson">
+	    SELECT a.chain_no 
+	    		 , a.chain_name
+		         , b.product_no
+		         , b.menu_name
+		         , b.single_price
+		         , b.set_price
+		         , b.calory
+		         , b.img_url
+		         , b.display_yn
+                 , b.category
+		      FROM chain_store a
+	 INNER JOIN products b
+	        ON a.chain_no = b.chain_no
+	</select>
 
 	<update id="updateBurger" parameterType="map" >
 	UPDATE products

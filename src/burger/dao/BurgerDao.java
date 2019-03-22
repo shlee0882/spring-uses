@@ -5,6 +5,7 @@ import java.util.Map;
 
 import burger.vo.AdminVO;
 import burger.vo.AuthInfo;
+import burger.vo.BurgerJsonVO;
 import burger.vo.BurgerVO;
 import burger.vo.DisplayVO;
 import burger.vo.DivisionVO;
@@ -35,5 +36,7 @@ public interface BurgerDao {
 	public DisplayVO updateDisplay(Map<String, Object> dataMap);
 
 	public DisplayVO insertDisplay(Map<String, Object> dataMap);
+
+	public List<BurgerJsonVO> getJsonAllBurgerList();
 
 }

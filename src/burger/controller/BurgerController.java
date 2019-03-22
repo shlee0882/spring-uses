@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import burger.service.BurgerService;
 import burger.vo.AdminVO;
+import burger.vo.BurgerJsonVO;
 import burger.vo.BurgerVO;
 
 @RestController
@@ -26,8 +27,8 @@ public class BurgerController {
 	
 	// 전체 조회
 	@RequestMapping(method=RequestMethod.GET)
-	public List<BurgerVO> getUserList() {
-		List<BurgerVO> burgerList = burgerService.getAllBurgerList();
+	public List<BurgerJsonVO> getJsonBurgerList() {
+		List<BurgerJsonVO> burgerList = burgerService.getJsonAllBurgerList();
 	    return burgerList;
 	}
 	
