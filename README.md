@@ -2,7 +2,11 @@
 
 배포 된 url : http://burgerinfo.tk/
 
-Open api url : 
+RESTful API : 
 
 햄버거 전체 목록 조회
 [GET] : http://13.124.203.134/burgers
+
+사용 기술 : 
+
+Spring Framework, AWS EC2(ubuntu), RDS(mariadb), imgurAPI(image upload)
