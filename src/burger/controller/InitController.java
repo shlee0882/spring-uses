@@ -118,7 +118,6 @@ public class InitController {
 			String id = (String) authInfo.getId();
 			Cookie rememberCookie = new Cookie("REMEMBER", id);
 			rememberCookie.setPath("/");
-			// ºê¶ó¿ìÀú ²ô¸é ÄíÅ° »ç¶óÁü
 			if ("on".equals(dataMap.get("rememberMe")) && dataMap.get("rememberMe") != null) {
 				rememberCookie.setMaxAge(24*60*60);
 			} else {

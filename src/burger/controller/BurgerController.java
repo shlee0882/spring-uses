@@ -25,7 +25,6 @@ public class BurgerController {
 	@Autowired
 	BurgerService burgerService;
 	
-	// 전체 조회
 	@RequestMapping(method=RequestMethod.GET)
 	public List<BurgerJsonVO> getJsonBurgerList() {
 		List<BurgerJsonVO> burgerList = burgerService.getJsonAllBurgerList();

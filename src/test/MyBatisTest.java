@@ -26,18 +26,16 @@ public class MyBatisTest {
 	
 	@Test @Ignore
 	public void getMenu() {
-		BurgerVO burger = burgerService.getBurger("ºò¸Æ");
+		BurgerVO burger = burgerService.getBurger("");
 		System.out.println(burger);
 	}
 	
-	// Á¶È¸
 	@Test @Ignore
 	public void getMenuList() {
 //		List<BurgerVO> burgerList = burgerService.getBurgerList();
 //		System.out.println(burgerList);
 	}
 	
-	// Ç×¸ñ Á¶È¸
 	@Test
 	public void getDivisionList() {
 		List<DivisionVO> divisionList = burgerService.getDivisionList();

@@ -48,10 +48,10 @@ public class BurgerDaoImpl implements BurgerDao {
 	public AdminVO getLoginRequest(Map<String, Object> dataMap) throws Exception {
 		AdminVO getLoginRequest = session.selectOne("burgerNS.selectLoginRequest", dataMap);
 		if(getLoginRequest == null) {
-			throw new Exception("로그인 실패");
+			throw new Exception("");
 		}
 		if(!"Y".equals(getLoginRequest.getUse_active())) {
-			throw new Exception("로그인 실패");
+			throw new Exception("");
 		}
 		return getLoginRequest;
 	}
@@ -66,7 +66,7 @@ public class BurgerDaoImpl implements BurgerDao {
 	public BurgerVO updateBurger(Map<String, Object> dataMap) {
 		BurgerVO burgerVO = new BurgerVO();
 		int result = session.update("burgerNS.updateBurger",dataMap);
-		System.out.println("결과값 : "+result);
+		System.out.println(" : "+result);
 		return burgerVO;
 		
 	}
@@ -75,7 +75,7 @@ public class BurgerDaoImpl implements BurgerDao {
 	public BurgerVO insertBurger(Map<String, Object> dataMap) {
 		BurgerVO burgerVO = new BurgerVO();
 		int result = session.insert("burgerNS.insertBurger", dataMap);
-		System.out.println("결과값 : "+result);
+		System.out.println(" : "+result);
 		return burgerVO;
 		
 	}
@@ -103,7 +103,7 @@ public class BurgerDaoImpl implements BurgerDao {
 	public DisplayVO updateDisplay(Map<String, Object> dataMap) {
 		DisplayVO displayVO = new DisplayVO();
 		int result = session.update("burgerNS.updateDisplay",dataMap);
-		System.out.println("결과값 : "+result);
+		System.out.println(" : "+result);
 		return displayVO;
 	}
 
@@ -111,7 +111,7 @@ public class BurgerDaoImpl implements BurgerDao {
 	public DisplayVO insertDisplay(Map<String, Object> dataMap) {
 		DisplayVO displayVO = new DisplayVO();
 		int result = session.insert("burgerNS.insertDisplay", dataMap);
-		System.out.println("결과값 : "+result);
+		System.out.println(" : "+result);
 		return displayVO;
 	}
 
