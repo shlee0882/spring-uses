@@ -29,7 +29,7 @@
 	            <artifactId>tomcat-maven-plugin</artifactId>
 	            <configuration>
 	                 <url>http://localhost:8080</url>
-	                 <path>/</path>
+	                 <path>/BurgerInfo</path>
 	                 <username>admin</username>
 	                 <password>0882@</password>
 	            </configuration>
