@@ -2,48 +2,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>BurgerInfo</groupId>
 	<artifactId>BurgerInfo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<fork>true</fork>
-          			<meminitial>512m</meminitial>
-          			<maxmem>1048m</maxmem>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
-				</configuration>
-			</plugin>
-            <plugin>
-	            <groupId>org.codehaus.mojo</groupId>
-	            <artifactId>tomcat-maven-plugin</artifactId>
-	            <configuration>
-	                 <url>http://localhost:8080</url>
-	                 <path>/BurgerInfo</path>
-	                 <username>admin</username>
-	                 <password>0882@</password>
-	            </configuration>
-            </plugin>
-		</plugins>
-	</build>
+	
 	<properties>
-		<spring.version>4.3.21.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+		<spring.version>4.3.21.RELEASE</spring.version>
 	</properties>
+	
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 		<dependency>
@@ -196,30 +167,25 @@
         </dependency>
 	</dependencies>
 	
-      <profiles>
-            <profile>
-                <id>production</id>
-                <build>
-                      <resources>
-                           <resource>
-                                 <directory>${project.basedir}/src</directory>
-                                 <excludes>
-                                       <exclude>**/*.java</exclude>
-                                 </excludes>
-                           </resource>
-                      </resources>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-                      <plugins>
-                           <plugin>
-                                 <groupId>org.apache.maven.plugins</groupId>
-                                 <artifactId>maven-resources-plugin</artifactId>
-                                 <configuration>
-                                       <encoding>UTF-8</encoding>
-                                 </configuration>
-                           </plugin>
-                      </plugins>
-                </build>
-            </profile>
-      </profiles>
-	
 </project>
