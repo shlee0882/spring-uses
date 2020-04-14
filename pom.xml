@@ -169,6 +169,11 @@
 	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+            <resource>
+                <directory>src/burger/config</directory>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
