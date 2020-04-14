@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:burger/config/beans.xml")
+@ContextConfiguration(locations="classpath:config/beans.xml")
 public class DBConnTest {
 	
 	@Autowired

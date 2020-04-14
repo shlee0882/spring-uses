@@ -171,7 +171,7 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
             <resource>
-                <directory>src/burger/config</directory>
+                <directory>src/config</directory>
             </resource>
         </resources>
 		<plugins>

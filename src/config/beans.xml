@@ -13,10 +13,10 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:burger/config/SqlMapConfig.xml"/>
+		<property name="configLocation" value="classpath:config/SqlMapConfig.xml"/>
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:burger/config/*Mapper.xml</value>
+				<value>classpath:config/*Mapper.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -26,7 +26,7 @@
 	</bean>
 	
 	<!--  properties file 설정 -->
-	<context:property-placeholder location="classpath:burger/config/db.properties"/>
+	<context:property-placeholder location="classpath:config/db.properties"/>
 	 
     <!-- MySQL dataSource -->
     <!-- 자신의 PC(로컬)에 MySql을 설치했을 경우 -->

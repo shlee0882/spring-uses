@@ -15,7 +15,7 @@ import burger.vo.BurgerVO;
 import burger.vo.DivisionVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:burger/config/beans.xml")
+@ContextConfiguration(locations="classpath:config/beans.xml")
 public class MyBatisTest {
 
 	@Autowired
