@@ -171,7 +171,7 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 	      <resource>
-	        <directory>src/config</directory>
+	        <directory>classpath:src/config</directory>
 	        <includes>
 	          <include>**/*.xml</include>
 	        </includes>
