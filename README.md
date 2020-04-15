@@ -1,10 +1,10 @@
 ## Spring Framework, RESTful API, Open API를 활용한 사이드 프로젝트 
 
 - 배포 된 url : 
-  - http://15.165.126.7/
+  - http://13.125.54.221:8080
 
 - RESTful API : 
-  - 조회 : [GET] : http://15.165.126.7/burgers
+  - 조회 : [GET] : http://13.125.54.221:8080/burgers
 
 - 사용 기술 : 
   - Spring Framework
@@ -32,6 +32,11 @@
   - 화면은 main페이지, login페이지, 관리자 조회/등록 페이지, 에러 404 page가 있습니다
   - 프론트는 bootstrap theme기반으로 필요한 component를 찾아서 새롭게 커스터마이징 하였습니다.
   - open API로 GET 방식의 상품 조회 API를 제공합니다.
+  
+- 젠킨스 통합관리
+ - 빌드 배포 자동화 툴을 적용해 빌드시 war로 생성되어 자동deploy합니다. 
+ - http://13.125.54.221:8080/jenkins/
+ - admin / 0882
   
 - 기타 :
   - 현재 등록된 상품은 테스트 데이터라 정확한 정보를 제공하지 않습니다.
