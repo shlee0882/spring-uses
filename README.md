@@ -1,10 +1,10 @@
 ## Spring Framework, RESTful API, Open API를 활용한 사이드 프로젝트 
 
 - 배포 된 url : 
-  - http://13.125.54.221:8080
+  - http://15.165.192.73:8080
 
 - RESTful API : 
-  - 조회 : [GET] : http://13.125.54.221:8080/burgers
+  - 조회 : [GET] : http://15.165.192.73:8080/burgers
 
 - 사용 기술 : 
   - Spring Framework
@@ -36,7 +36,7 @@
   
 - 젠킨스 통합관리
   - 빌드 배포 자동화 툴을 적용해 빌드시 war로 생성되어 자동deploy합니다. 
-  - http://13.125.54.221:8080/jenkins/
+  - http://15.165.192.73:8080/jenkins/
   - admin / 0882
   
 - 기타 :
