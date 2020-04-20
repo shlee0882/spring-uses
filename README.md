@@ -8,9 +8,9 @@
 
 - 사용 기술 : 
   - Spring Framework
-  - AWS EC2(ubuntu)
+  - AWS EC2(ubuntu linux 18.04)
   - AWS RDS(mariadb)
-  - imgurAPI(image upload)
+  - imgurAPI(open api image upload)
 
 - 서비스 내용 :
   - 사용자는 조건에 맞게 자신의 햄버거를 찾을 수 있다.
