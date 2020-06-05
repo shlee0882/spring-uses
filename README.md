@@ -1,5 +1,7 @@
 ## Spring Framework, RESTful API, Open API를 활용한 사이드 프로젝트 
 
+[![Build Status](https://travis-ci.org/shlee0882/burgerInfo-spring-project.svg?branch=master)](https://travis-ci.org/shlee0882/burgerInfo-spring-project)
+
 - 배포 된 url : 
   - http://15.165.192.73:8080
 
@@ -38,6 +40,8 @@
   - 빌드 배포 자동화 툴을 적용해 빌드시 war로 생성되어 자동deploy합니다. 
   - http://15.165.192.73:8080/jenkins/
   - admin / 0882
+  
+- travis ci 적용
   
 - 기타 :
   - 현재 등록된 상품은 테스트 데이터라 정확한 정보를 제공하지 않습니다.
