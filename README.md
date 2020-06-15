@@ -40,7 +40,7 @@
   - 빌드 배포 자동화 툴을 적용해 빌드시 war로 생성되어 자동deploy합니다. 
   - http://34.64.230.81:8080/jenkins/
   - admin / 0882
-  
+    - [젠킨스 적용 포스팅](https://shlee0882.tistory.com/category/%EC%A0%84%EC%B2%B4/%EC%A0%A0%ED%82%A8%EC%8A%A4)
 - travis ci 적용
   
 - 기타 :
